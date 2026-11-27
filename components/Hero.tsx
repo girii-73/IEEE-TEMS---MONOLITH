@@ -92,7 +92,7 @@ export function Hero() {
             pulse={compact ? 0.35 : 1.35}
             speed={compact ? 0.55 : 1.15}
             beamPosition={0.5}
-            surfaceLevel={0.68}
+            surfaceLevel={0.62}
             mouseInteraction={!compact}
             intro={!compact}
             dpr={compact ? 1 : undefined}
@@ -100,10 +100,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 -mt-[100svh] flex min-h-[130svh] flex-col sm:min-h-[140svh]">
-        {/* Pin hero copy to the lower band of the first viewport, just above the rule */}
-        <div className="relative z-[1] flex min-h-[100svh] w-full flex-col">
-          <div className="mx-auto mt-auto flex w-full max-w-5xl flex-col items-center px-4 pb-8 text-center sm:px-8 sm:pb-10">
+      <div className="relative z-10 -mt-[100svh]">
+        {/* One viewport of hero copy, packed to the lower band — About follows immediately */}
+        <div className="relative z-[1] flex min-h-[100svh] w-full flex-col justify-end">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-8 text-center sm:px-8 sm:pb-10">
             <div className="relative mb-2 inline-flex w-full max-w-[min(100%,22rem)] flex-col items-stretch sm:max-w-none sm:w-auto">
               <div
                 ref={laserSurfaceRef}
@@ -166,9 +166,9 @@ export function Hero() {
             </div>
 
             <a
-              href="#hero-end"
-              aria-label="Scroll to end of hero"
-              className="mt-5 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac sm:mt-7"
+              href="#about"
+              aria-label="Scroll to about"
+              className="mt-5 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac sm:mt-6"
             >
               <span>Scroll</span>
               <ArrowDown
@@ -177,9 +177,9 @@ export function Hero() {
               />
             </a>
           </div>
-
-          <div id="hero-end" className="section-rule w-full scroll-mt-24" />
         </div>
+
+        <div id="hero-end" className="section-rule w-full scroll-mt-24" />
       </div>
     </section>
   );

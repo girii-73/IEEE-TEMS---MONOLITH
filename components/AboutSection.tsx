@@ -17,10 +17,8 @@ export function AboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="relative mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-12 md:pb-32 md:pt-14"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
       <div className="grid grid-cols-1 gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-16">
         <FadeContent
           blur
