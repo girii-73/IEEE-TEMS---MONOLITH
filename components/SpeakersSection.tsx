@@ -53,9 +53,9 @@ export function SpeakersSection() {
             Featured · Day 1 · 40–45 min + Q&amp;A
           </p>
           <h3 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-mist tracking-tight">
-            Tiaga Sir
+            Thiaga Sir
           </h3>
-          <p className="mt-1 text-sm text-dusk">CarrotLane · Details to be updated</p>
+          <p className="mt-1 text-sm text-dusk">CaratLane - A TATA Product · Details to be updated</p>
 
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
             {TALK_TOPICS.map((topic) => (
