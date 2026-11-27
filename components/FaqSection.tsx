@@ -90,7 +90,7 @@ export function FaqSection() {
                       }
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 text-sm text-dusk leading-relaxed max-w-[60ch]">
+                      <p className="pb-5 text-sm text-dusk leading-relaxed max-w-[60ch] whitespace-pre-line">
                         {item.answer}
                       </p>
                     </motion.div>

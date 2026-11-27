@@ -1,49 +1,105 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { EVENT } from "@/data/event";
 import Counter from "@/components/Counter.jsx";
+
+const TARGET_TIMESTAMP_ISO = EVENT.EVENT_START_ISO || "2026-12-21T09:00:00+05:30";
 
 interface TimeLeft {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+  completed: boolean;
 }
 
-const ZERO: TimeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+const ZERO: TimeLeft = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  completed: false,
+};
 
 function getTimeLeft(now: number, target: number): TimeLeft {
-  const diff = Math.max(0, target - now);
+  const diff = target - now;
+  if (Number.isNaN(target) || diff <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, completed: true };
+  }
+
+  const totalSeconds = Math.ceil(diff / 1000);
   return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
+    days: Math.floor(totalSeconds / 86400),
+    hours: Math.floor((totalSeconds % 86400) / 3600),
+    minutes: Math.floor((totalSeconds % 3600) / 60),
+    seconds: totalSeconds % 60,
+    completed: false,
   };
 }
 
+const emptySubscribe = () => () => {};
+
+function subscribeCompact(callback: () => void) {
+  const mq = window.matchMedia("(max-width: 639px)");
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function getCompactSnapshot() {
+  return window.matchMedia("(max-width: 639px)").matches;
+}
+
 export function Countdown() {
-  const target = new Date(EVENT.EVENT_START_ISO).getTime();
+  const target = new Date(TARGET_TIMESTAMP_ISO).getTime();
+  const ready = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const compact = useSyncExternalStore(
+    subscribeCompact,
+    getCompactSnapshot,
+    () => false
+  );
   const [time, setTime] = useState<TimeLeft>(ZERO);
-  const [ready, setReady] = useState(false);
-  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
-    const tick = () => setTime(getTimeLeft(Date.now(), target));
-    tick();
-    setReady(true);
-    const id = window.setInterval(tick, 1000);
-    return () => window.clearInterval(id);
+    let timeoutId = 0;
+
+    const scheduleTick = (delay: number) => {
+      timeoutId = window.setTimeout(() => {
+        const now = Date.now();
+        const next = getTimeLeft(now, target);
+        setTime(next);
+        if (!next.completed) {
+          const remainder = (target - now) % 1000;
+          const nextDelay = remainder > 0 ? remainder + 15 : 1015;
+          scheduleTick(nextDelay);
+        }
+      }, delay);
+    };
+
+    scheduleTick(0);
+    return () => window.clearTimeout(timeoutId);
   }, [target]);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 639px)");
-    const sync = () => setCompact(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
+  if (ready && time.completed) {
+    return (
+      <div
+        className="countdown-cell mx-auto flex max-w-md flex-col items-center justify-center rounded-md px-5 py-3.5 text-center"
+        role="status"
+        aria-live="polite"
+      >
+        <p className="font-display text-base font-semibold tracking-tight text-mist sm:text-xl">
+          MONOLITH is live
+        </p>
+        <p className="mt-1 text-[11px] font-medium text-lilac sm:text-xs">
+          21–22 December 2026 · Started 9:00 AM IST
+        </p>
+      </div>
+    );
+  }
 
   const cells = [
     { label: "Days", value: time.days },
@@ -55,7 +111,7 @@ export function Countdown() {
   return (
     <div
       className="grid w-full grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-stretch sm:justify-center sm:gap-3"
-      aria-label="Countdown to event"
+      aria-label="Countdown to MONOLITH on 21 December 2026 at 9:00 AM IST"
     >
       {cells.map((cell) => (
         <div
@@ -73,7 +129,7 @@ export function Countdown() {
                 duration={compact ? 0.35 : 0.55}
                 bounce={compact ? 0 : 0.12}
                 stagger={compact ? 0 : 0.03}
-                motionBlur={!compact}
+                motionBlur
                 intro={false}
                 fade={0.2}
                 gap={0}
