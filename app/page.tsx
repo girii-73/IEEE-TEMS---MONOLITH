@@ -5,10 +5,12 @@ import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { JudgingSection } from "@/components/JudgingSection";
+import { LegacyHoneycombSection } from "@/components/LegacyHoneycombSection";
 import { Navbar } from "@/components/Navbar";
 import { PassesSection } from "@/components/PassesSection";
 import { PrizesSection } from "@/components/PrizesSection";
 import { ScheduleSection } from "@/components/ScheduleSection";
+import { SpeakersSection } from "@/components/SpeakersSection";
 
 export default function HomePage() {
   return (
@@ -19,9 +21,11 @@ export default function HomePage() {
         <AboutSection />
         <DaysSection />
         <ScheduleSection />
+        <SpeakersSection />
         <JudgingSection />
         <PrizesSection />
         <PassesSection />
+        <LegacyHoneycombSection />
         <FaqSection />
         <CoordinatorsSection />
       </main>

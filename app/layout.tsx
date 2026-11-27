@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Unbounded, Manrope } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/MotionProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { EVENT, getDisplayVenue } from "@/data/event";
 
 const unbounded = Unbounded({
@@ -54,10 +55,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
       className={`${unbounded.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-void text-mist font-sans selection:bg-violet selection:text-mist">
-        <MotionProvider>{children}</MotionProvider>
+        <ThemeProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
