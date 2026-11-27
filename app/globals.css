@@ -248,6 +248,38 @@ body {
   background: rgba(255, 255, 255, 0.78);
 }
 
+/* Wordmark — laser hits an invisible 1px strike line above the glyphs */
+.title-laser-text {
+  color: #d4bbff;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  -webkit-text-stroke: 0.45px rgba(184, 146, 255, 0.55);
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(184, 146, 255, 0.65),
+    0 0 32px rgba(107, 19, 175, 0.55),
+    0 0 56px rgba(107, 19, 175, 0.35);
+}
+
+.laser-strike-line {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.laser-drip-layer canvas {
+  mix-blend-mode: screen;
+}
+
+[data-theme="light"] .title-laser-text {
+  color: #120e18;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 0 20px rgba(184, 146, 255, 0.3);
+}
+
+[data-theme="light"] .laser-drip-layer canvas {
+  mix-blend-mode: multiply;
+}
+
 /* Limegreen-style floating pill tab bar */
 .nav-pill {
   background: rgba(245, 245, 243, 0.94);

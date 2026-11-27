@@ -51,26 +51,9 @@ export function Navbar() {
           scrolled ? "bg-[#f8f8f6]/97 shadow-[0_14px_44px_-16px_rgba(0,0,0,0.6)]" : ""
         }`}
       >
-        <a
-          href="#top"
-          onClick={() => setOpen(false)}
-          className="flex shrink-0 items-center gap-2 rounded-full px-2 py-1.5 text-sm font-medium tracking-tight text-[#1a1a1a] transition-opacity hover:opacity-70"
-        >
-          <span
-            aria-hidden="true"
-            className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#1a1a1a] text-[10px] font-semibold tracking-tighter text-[#f8f8ff]"
-          >
-            M
-          </span>
-          <span className="font-sans">
-            monolith
-            <span className="text-[#6b13af]">.fest</span>
-          </span>
-        </a>
-
         <nav
           aria-label="Primary"
-          className="ml-1 hidden flex-1 items-center justify-center gap-0.5 lg:flex"
+          className="hidden flex-1 items-center justify-start gap-0.5 lg:flex"
         >
           {NAV_LINKS.map((link) => (
             <a
