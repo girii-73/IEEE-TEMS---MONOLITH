@@ -32,7 +32,7 @@ export function Hero() {
     <section
       id="top"
       aria-label="MONOLITH festival overview"
-      className="relative w-full overflow-x-clip"
+      className="relative w-full overflow-x-clip bg-void"
     >
       {/* Sticky stage: DotGrid + laser + pixel trail reverse cleanly on scroll-up */}
       <div
@@ -46,7 +46,7 @@ export function Hero() {
               dotSize={3}
               gap={30}
               baseColor="#2a1a45"
-              activeColor="#b892ff"
+              activeColor="#9867e1"
               proximity={130}
               shockRadius={260}
               shockStrength={2.5}
@@ -65,8 +65,8 @@ export function Hero() {
               trailSize={0.09}
               maxAge={420}
               interpolate={5}
-              color="#b892ff"
-              trailColor="#6b13af"
+              color="#9867e1"
+              trailColor="#5f279e"
               gooeyFilter={{ strength: 2 }}
               glow={0.45}
               shine={0.55}
@@ -78,21 +78,21 @@ export function Hero() {
         <div className="laser-drip-layer pointer-events-none absolute inset-0 z-[2]">
           <LaserFlow
             surfaceRef={laserSurfaceRef}
-            color="#d4bbff"
+            color="#9867e1"
             theme="dark"
-            intensity={compact ? 0.95 : 2.25}
-            beamWidth={compact ? 0.95 : 2.15}
-            flare={compact ? 0.55 : 1.55}
-            spread={compact ? 0.55 : 1.45}
-            spill={compact ? 0.55 : 1.25}
-            fog={compact ? 0 : 0.14}
-            dust={compact ? 0 : 1.35}
-            streaks={compact ? 0.25 : 1.7}
-            dots={compact ? 0 : 0.9}
-            pulse={compact ? 0.35 : 1.35}
-            speed={compact ? 0.55 : 1.15}
+            intensity={compact ? 0.8 : 1.8}
+            beamWidth={compact ? 0.95 : 2.0}
+            flare={compact ? 0.48 : 1.25}
+            spread={compact ? 0.5 : 1.3}
+            spill={compact ? 0.45 : 1.05}
+            fog={compact ? 0 : 0.1}
+            dust={compact ? 0 : 1.0}
+            streaks={compact ? 0.22 : 1.35}
+            dots={compact ? 0 : 0.65}
+            pulse={compact ? 0.3 : 1.1}
+            speed={compact ? 0.5 : 1}
             beamPosition={0.5}
-            surfaceLevel={0.68}
+            surfaceLevel={0.72}
             mouseInteraction={!compact}
             intro={!compact}
             dpr={compact ? 1 : undefined}
@@ -100,17 +100,17 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 -mt-[100svh] flex min-h-[130svh] flex-col sm:min-h-[140svh]">
-        {/* Pin hero copy to the lower band of the first viewport, just above the rule */}
-        <div className="relative z-[1] flex min-h-[100svh] w-full flex-col">
-          <div className="mx-auto mt-auto flex w-full max-w-5xl flex-col items-center px-4 pb-8 text-center sm:px-8 sm:pb-10">
+      <div className="relative z-10 -mt-[100svh]">
+        {/* Extra height + justify-end drops the title block further down-center */}
+        <div className="relative z-[1] flex min-h-[calc(100svh+12vh)] w-full flex-col justify-end sm:min-h-[calc(100svh+14vh)]">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-8 text-center sm:px-8 sm:pb-10">
             <div className="relative mb-2 inline-flex w-full max-w-[min(100%,22rem)] flex-col items-stretch sm:max-w-none sm:w-auto">
               <div
                 ref={laserSurfaceRef}
                 aria-hidden="true"
                 className="laser-strike-line h-px w-full shrink-0"
               />
-              <h1 className="title-laser-text -mt-px select-none text-center font-sans text-[clamp(2.35rem,12vw,9rem)] font-black uppercase leading-none tracking-tighter">
+              <h1 className="title-laser-text relative z-[2] -mt-px select-none text-center font-sans text-[clamp(2.75rem,14vw,10rem)] font-black uppercase leading-none tracking-tighter">
                 MONOLITH
               </h1>
             </div>
@@ -166,9 +166,9 @@ export function Hero() {
             </div>
 
             <a
-              href="#hero-end"
-              aria-label="Scroll to end of hero"
-              className="mt-5 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac sm:mt-7"
+              href="#about"
+              aria-label="Scroll to about"
+              className="mt-5 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac sm:mt-6"
             >
               <span>Scroll</span>
               <ArrowDown
@@ -177,9 +177,9 @@ export function Hero() {
               />
             </a>
           </div>
-
-          <div id="hero-end" className="section-rule w-full scroll-mt-24" />
         </div>
+
+        <div id="hero-end" className="section-rule w-full scroll-mt-24" />
       </div>
     </section>
   );

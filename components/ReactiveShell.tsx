@@ -6,7 +6,7 @@ import ClickSpark from "@/components/ClickSpark";
 export function ReactiveShell({ children }: { children: ReactNode }) {
   return (
     <ClickSpark
-      sparkColor={["#b892ff", "#9b72cf", "#f8f8ff"]}
+      sparkColor={["#9867e1", "#7a45c4", "#5f279e"]}
       sparkSize={8}
       sparkRadius={28}
       sparkCount={10}

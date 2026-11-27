@@ -67,7 +67,7 @@ const ACCENT = {
   },
   lilac: {
     border: "border-lilac/45",
-    glow: "shadow-[0_0_0_1px_rgba(184,146,255,0.2),0_0_40px_-14px_rgba(184,146,255,0.45)]",
+    glow: "shadow-[0_0_0_1px_rgba(152,103,225,0.28),0_0_40px_-14px_rgba(152,103,225,0.48)]",
     icon: "text-lilac",
     wash: "from-lilac/18 via-transparent to-transparent",
   },
@@ -78,10 +78,10 @@ const ACCENT = {
     wash: "from-white/8 via-transparent to-transparent",
   },
   amber: {
-    border: "border-[#9b72cf]/40",
-    glow: "shadow-[0_0_0_1px_rgba(155,114,207,0.18),0_0_36px_-14px_rgba(155,114,207,0.4)]",
+    border: "border-[#5f279e]/50",
+    glow: "shadow-[0_0_0_1px_rgba(95,39,158,0.25),0_0_36px_-14px_rgba(95,39,158,0.45)]",
     icon: "text-amethyst",
-    wash: "from-[#9b72cf]/16 via-transparent to-transparent",
+    wash: "from-[#5f279e]/20 via-transparent to-transparent",
   },
 } as const;
 
@@ -100,7 +100,7 @@ export function PrizesSection() {
       >
         <div className="absolute left-1/2 top-24 h-64 w-[min(90vw,42rem)] -translate-x-1/2 rounded-full bg-[#e8c547]/[0.07] blur-[90px]" />
         <div className="absolute bottom-24 left-[10%] h-48 w-48 rounded-full bg-lilac/10 blur-[80px]" />
-        <div className="absolute right-[8%] top-1/3 h-40 w-40 rounded-full bg-[#9b72cf]/10 blur-[70px]" />
+        <div className="absolute right-[8%] top-1/3 h-40 w-40 rounded-full bg-[#5f279e]/14 blur-[70px]" />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32">

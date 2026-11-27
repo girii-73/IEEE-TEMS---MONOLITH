@@ -14,7 +14,7 @@ function PageBackdrop() {
         className="absolute -top-40 left-1/2 h-[520px] w-[min(900px,120vw)] -translate-x-1/2 rounded-full opacity-90"
         style={{
           background:
-            "radial-gradient(circle at 50% 40%, rgba(107, 19, 175, 0.16) 0%, rgba(184, 146, 255, 0.06) 45%, transparent 70%)",
+            "radial-gradient(circle at 50% 40%, rgba(152, 103, 225, 0.24) 0%, rgba(95, 39, 158, 0.12) 45%, transparent 70%)",
         }}
       />
       {/* Fine grain */}
