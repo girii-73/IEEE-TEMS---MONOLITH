@@ -362,7 +362,7 @@ function Scene() {
         angle={0.55}
         penumbra={0.85}
         intensity={0.85}
-        color="#6b13af"
+        color="#5f279e"
       />
       <directionalLight position={[0, 7, 1.5]} intensity={0.45} color="#f4f0ff" />
       <pointLight position={[0, 3.2, 0.4]} intensity={1.4} color={GLOW} distance={5} />

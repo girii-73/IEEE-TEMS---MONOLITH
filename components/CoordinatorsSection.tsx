@@ -38,7 +38,7 @@ export function CoordinatorsSection() {
               title="Student Coordinator"
               handle={toHandle(name)}
               status="IEEE TEMS"
-              statusColor="#b892ff"
+              statusColor="#9867e1"
               contactText="Hello"
               showUserInfo
               theme="dark"

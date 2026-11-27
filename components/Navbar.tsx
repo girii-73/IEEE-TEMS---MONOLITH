@@ -43,7 +43,7 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="nav-safe-top pointer-events-none fixed inset-x-0 top-0 z-50 px-3 sm:px-5">
+    <header className="nav-safe-top pointer-events-none fixed inset-x-0 top-0 z-[200] px-3 sm:px-5">
       <a
         href="#main-content"
         className="pointer-events-auto sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-mist focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-void"
@@ -92,7 +92,7 @@ export function Navbar() {
             colorDuration={280}
             trackColor="#2a1a45"
             trackOnColor="#f4ecff"
-            thumbColor="#d4bbff"
+            thumbColor="#9867e1"
             thumbOnColor="#4b0082"
           />
 
