@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import SquishSwitch from "@/components/SquishSwitch.jsx";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -52,8 +53,8 @@ export function Navbar() {
       </a>
 
       <div
-        className={`pointer-events-auto mx-auto flex w-full max-w-6xl items-center gap-2 rounded-full border border-white/60 bg-[#f5f5f3]/95 px-2.5 py-1.5 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:px-4 sm:py-2 ${
-          scrolled ? "bg-[#f8f8f6]/97 shadow-[0_14px_44px_-16px_rgba(0,0,0,0.6)]" : ""
+        className={`nav-gradient-pill pointer-events-auto mx-auto flex w-full max-w-6xl items-center gap-2 rounded-full px-2.5 py-1.5 sm:px-4 sm:py-2 ${
+          scrolled ? "is-scrolled" : ""
         }`}
       >
         <nav
@@ -64,28 +65,36 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-2 text-[13px] font-medium tracking-tight text-[#3a3a3a] transition-colors hover:bg-black/5 hover:text-[#111]"
+              className="rounded-full px-3 py-2 text-[13px] font-medium tracking-tight text-[#2a1848]/90 transition-colors hover:bg-white/35 hover:text-[#120e18]"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
+          <SquishSwitch
+            checked={theme === "light"}
+            onChange={(next: boolean) => {
+              if ((next && theme !== "light") || (!next && theme !== "dark")) {
+                toggleTheme();
+              }
+            }}
+            ariaLabel={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[#1a1a1a] transition-colors hover:bg-black/5"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-4 w-4" aria-hidden="true" />
-            ) : (
-              <Moon className="h-4 w-4" aria-hidden="true" />
-            )}
-          </button>
+            width={52}
+            height={28}
+            radius={14}
+            speed={58}
+            stretch={28}
+            hoverScale={1.04}
+            colorDuration={280}
+            trackColor="#2a1a45"
+            trackOnColor="#f4ecff"
+            thumbColor="#d4bbff"
+            thumbOnColor="#4b0082"
+          />
 
           <a
             href="#passes"
@@ -101,7 +110,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-nav-sheet"
             aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[#1a1a1a] transition-colors hover:bg-black/5 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[#2a1848] transition-colors hover:bg-white/35 lg:hidden"
           >
             {open ? (
               <X className="h-5 w-5" aria-hidden="true" />
@@ -120,7 +129,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-auto mx-auto mt-2 max-h-[min(80svh,calc(100svh-5rem))] w-full max-w-6xl overflow-y-auto overscroll-contain rounded-[24px] border border-white/60 bg-[#f5f5f3]/97 px-4 py-3 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl lg:hidden"
+            className="nav-gradient-pill pointer-events-auto mx-auto mt-2 max-h-[min(80svh,calc(100svh-5rem))] w-full max-w-6xl overflow-y-auto overscroll-contain rounded-[24px] px-4 py-3 lg:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col">
               {NAV_LINKS.map((link) => (
@@ -128,7 +137,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="border-b border-black/5 py-3.5 text-base font-medium tracking-tight text-[#1a1a1a] transition-opacity hover:opacity-70 last:border-b-0"
+                  className="border-b border-[#2a1848]/10 py-3.5 text-base font-medium tracking-tight text-[#2a1848] transition-opacity hover:opacity-70 last:border-b-0"
                 >
                   {link.label}
                 </a>

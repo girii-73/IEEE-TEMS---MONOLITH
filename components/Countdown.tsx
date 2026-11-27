@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { EVENT } from "@/data/event";
+import Counter from "@/components/Counter.jsx";
 
 interface TimeLeft {
   days: number;
@@ -22,14 +23,11 @@ function getTimeLeft(now: number, target: number): TimeLeft {
   };
 }
 
-function pad(n: number) {
-  return String(n).padStart(2, "0");
-}
-
 export function Countdown() {
   const target = new Date(EVENT.EVENT_START_ISO).getTime();
   const [time, setTime] = useState<TimeLeft>(ZERO);
   const [ready, setReady] = useState(false);
+  const [compact, setCompact] = useState(false);
 
   useEffect(() => {
     const tick = () => setTime(getTimeLeft(Date.now(), target));
@@ -38,6 +36,14 @@ export function Countdown() {
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, [target]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const sync = () => setCompact(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   const cells = [
     { label: "Days", value: time.days },
@@ -56,9 +62,26 @@ export function Countdown() {
           key={cell.label}
           className="countdown-cell flex min-w-0 flex-col items-center justify-center rounded-md px-1.5 py-2.5 sm:px-4 sm:py-3.5"
         >
-          <span className="font-display text-xl font-semibold tracking-tight text-mist tabular-nums leading-none sm:text-3xl">
-            {ready ? pad(cell.value) : "––"}
-          </span>
+          <div className="font-display text-mist leading-none">
+            {ready ? (
+              <Counter
+                value={cell.value}
+                minDigits={2}
+                fontSize={compact ? 22 : 32}
+                fontWeight={600}
+                textColor="inherit"
+                duration={compact ? 0.35 : 0.55}
+                bounce={compact ? 0 : 0.12}
+                stagger={compact ? 0 : 0.03}
+                motionBlur={!compact}
+                intro={false}
+                fade={0.2}
+                gap={0}
+              />
+            ) : (
+              <span className="text-xl sm:text-3xl">––</span>
+            )}
+          </div>
           <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-mute sm:mt-1.5 sm:text-[10px] sm:tracking-[0.18em]">
             {cell.label}
           </span>
