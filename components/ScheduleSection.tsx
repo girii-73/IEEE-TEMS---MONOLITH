@@ -2,14 +2,13 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Clock } from "lucide-react";
 import { SCHEDULE_DATA } from "@/data/event";
 
 type DayKey = "day1" | "day2";
 
-const TABS: { key: DayKey; label: string; subtitle: string; date: string }[] = [
-  { key: "day1", label: "Day 01", subtitle: "Management Summit", date: "21 Dec" },
-  { key: "day2", label: "Day 02", subtitle: "Sprintathon", date: "22 Dec" },
+const TABS: { key: DayKey; label: string; date: string }[] = [
+  { key: "day1", label: "Day 01 — Summit", date: "21 Dec" },
+  { key: "day2", label: "Day 02 — Sprint", date: "22 Dec" },
 ];
 
 export function ScheduleSection() {
@@ -20,18 +19,9 @@ export function ScheduleSection() {
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       event.preventDefault();
-      const nextIndex = (index + 1) % TABS.length;
-      const nextTab = TABS[nextIndex];
-      setActiveDay(nextTab.key);
-      document.getElementById(`schedule-tab-${nextTab.key}`)?.focus();
-    } else if (event.key === "Home") {
-      event.preventDefault();
-      setActiveDay("day1");
-      document.getElementById("schedule-tab-day1")?.focus();
-    } else if (event.key === "End") {
-      event.preventDefault();
-      setActiveDay("day2");
-      document.getElementById("schedule-tab-day2")?.focus();
+      const next = TABS[(index + 1) % TABS.length];
+      setActiveDay(next.key);
+      document.getElementById(`schedule-tab-${next.key}`)?.focus();
     }
   };
 
@@ -39,150 +29,109 @@ export function ScheduleSection() {
     <section
       id="schedule"
       aria-labelledby="schedule-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
-      >
+      <div className="section-rule mb-16 md:mb-20" />
+
+      <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="glass-surface-lite inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-lilac mb-3">
-            <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-            HUD Timeline
-          </div>
+          <p className="section-label">Timeline 03</p>
           <h2
             id="schedule-heading"
-            className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
+            className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
           >
-            Event Schedule
+            Event timeline
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-dusk">
-            {SCHEDULE_DATA.note}
-          </p>
+          <p className="mt-3 max-w-lg text-sm text-dusk">{SCHEDULE_DATA.note}</p>
         </div>
 
-        {/* Accessible sliding-indicator tabs */}
         <div
           role="tablist"
           aria-label="Festival days"
-          className="glass-surface-lite inline-flex self-start rounded-full p-1"
+          className="inline-flex self-start border border-hairline"
         >
           {TABS.map((tab, idx) => {
-            const isSelected = activeDay === tab.key;
+            const selected = activeDay === tab.key;
             return (
               <button
                 key={tab.key}
                 id={`schedule-tab-${tab.key}`}
                 role="tab"
                 type="button"
-                aria-selected={isSelected}
+                aria-selected={selected}
                 aria-controls={`schedule-panel-${tab.key}`}
-                tabIndex={isSelected ? 0 : -1}
+                tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveDay(tab.key)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className="relative rounded-full px-5 py-2.5 text-left transition-colors"
+                className={`px-4 py-2.5 text-left transition-colors ${
+                  selected
+                    ? "bg-mist text-void"
+                    : "text-dusk hover:text-mist hover:bg-raised"
+                }`}
               >
-                {isSelected && (
-                  <motion.span
-                    layoutId="schedule-tab-indicator"
-                    transition={{ type: "spring", stiffness: 360, damping: 32 }}
-                    className="absolute inset-0 rounded-full bg-violet border border-lilac/40 shadow-[0_0_20px_rgba(139,92,246,0.45)]"
-                    aria-hidden="true"
-                  />
-                )}
-                <span className="relative z-10 flex items-baseline gap-2">
-                  <span
-                    className={`font-display text-sm font-semibold ${
-                      isSelected ? "text-mist" : "text-dusk hover:text-mist"
-                    }`}
-                  >
-                    {tab.label}
-                  </span>
-                  <span
-                    className={`text-xs tabular-nums ${
-                      isSelected ? "text-mist/85" : "text-dusk/80"
-                    }`}
-                  >
-                    {tab.date}
-                  </span>
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.12em]">
+                  {tab.label}
+                </span>
+                <span
+                  className={`mt-0.5 block text-[10px] tabular-nums ${
+                    selected ? "text-void/70" : "text-mute"
+                  }`}
+                >
+                  {tab.date}
                 </span>
               </button>
             );
           })}
         </div>
-      </motion.div>
+      </div>
 
-      {/* HUD Glassmorphic Vertical Timeline */}
       <AnimatePresence mode="wait">
-        <motion.div
+        <motion.ol
           key={activeDay}
           role="tabpanel"
           id={`schedule-panel-${activeDay}`}
           aria-labelledby={`schedule-tab-${activeDay}`}
-          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-10 pl-6 sm:pl-10"
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+          transition={{ duration: 0.25 }}
+          className="relative mt-12 border-l border-hairline pl-8 sm:pl-10"
         >
-          {/* Glowing vertical spine */}
-          <div
-            aria-hidden="true"
-            className="absolute top-2 bottom-2 left-2 sm:left-3 w-[2px] bg-gradient-to-b from-lilac via-amethyst/60 to-transparent"
-          />
-
-          <ol className="space-y-4">
-            {items.map((item, idx) => (
-              <motion.li
-                key={`${activeDay}-${item.time}-${item.title}`}
-                initial={shouldReduceMotion ? false : { opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.35,
-                  delay: idx * 0.04,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="relative"
-              >
-                {/* Glowing Timeline Node */}
-                <span
-                  aria-hidden="true"
-                  className="absolute -left-[22px] sm:-left-[34px] top-5 h-3 w-3 rounded-full border-2 border-lilac bg-void shadow-[0_0_12px_rgba(184,146,255,0.85)]"
-                />
-
-                <div className="glass-panel rounded-[12px] px-5 py-4 sm:px-6 sm:py-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-lilac/45">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                    <h3 className="font-display text-base sm:text-lg font-medium text-mist">
-                      {item.title}
-                    </h3>
-                    <span className="inline-flex w-fit items-center rounded-full border border-lilac/25 bg-deep/75 px-3 py-0.5 text-xs font-semibold text-lilac tabular-nums">
-                      {item.time}
-                    </span>
-                  </div>
-
-                  {item.nested && item.nested.length > 0 && (
-                    <div className="mt-3 grid grid-cols-1 gap-2 border-t border-lilac/15 pt-3 sm:grid-cols-2">
-                      {item.nested.map((sub) => (
-                        <div
-                          key={`${sub.time}-${sub.title}`}
-                          className="flex items-center justify-between rounded-[8px] bg-deep/50 px-3 py-1.5 text-xs text-dusk"
-                        >
-                          <span>{sub.title}</span>
-                          <span className="font-semibold text-lilac tabular-nums">
-                            {sub.time}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+          {items.map((item, idx) => (
+            <li key={`${activeDay}-${item.time}-${item.title}`} className="relative pb-8 last:pb-0">
+              <span
+                aria-hidden="true"
+                className="absolute -left-[2.05rem] sm:-left-[2.55rem] top-1.5 h-2.5 w-2.5 rounded-full border border-lilac bg-void"
+              />
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <div>
+                  <span className="font-display text-[10px] text-mute tabular-nums">
+                    Phase {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-1 font-display text-base sm:text-lg font-medium text-mist">
+                    {item.title}
+                  </h3>
                 </div>
-              </motion.li>
-            ))}
-          </ol>
-        </motion.div>
+                <time className="text-xs font-semibold uppercase tracking-wider text-lilac tabular-nums shrink-0">
+                  {item.time}
+                </time>
+              </div>
+              {item.nested && item.nested.length > 0 && (
+                <ul className="mt-3 space-y-1.5 border-l border-hairline pl-4">
+                  {item.nested.map((sub) => (
+                    <li
+                      key={`${sub.time}-${sub.title}`}
+                      className="flex items-center justify-between gap-4 text-xs text-dusk"
+                    >
+                      <span>{sub.title}</span>
+                      <span className="tabular-nums text-mute">{sub.time}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </motion.ol>
       </AnimatePresence>
     </section>
   );

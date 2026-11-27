@@ -13,86 +13,93 @@ export function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
-      <h2
-        id="faq-heading"
-        className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-mist"
-      >
-        Questions
-      </h2>
+      <div className="section-rule mb-16 md:mb-20" />
 
-      <div className="mt-10 max-w-3xl space-y-3">
-        {FAQ_ITEMS.map((item, index) => {
-          const isOpen = openIndex === index;
-          const buttonId = `faq-button-${index}`;
-          const panelId = `faq-panel-${index}`;
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-4">
+          <p className="section-label">FAQ 08</p>
+          <h2
+            id="faq-heading"
+            className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
+          >
+            Got questions?
+          </h2>
+          <p className="mt-3 text-sm text-dusk max-w-xs">
+            Everything you need to know before you register.
+          </p>
+        </div>
 
-          return (
-            <div
-              key={item.question}
-              className="rounded-[12px] border border-lilac/20 bg-deep/65 transition-colors hover:border-amethyst/45"
-            >
-              <h3>
-                <button
-                  id={buttonId}
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 rounded-[12px] px-5 py-4 sm:px-6 sm:py-5 text-left"
-                >
-                  <span className="text-base font-semibold text-mist">
-                    {item.question}
-                  </span>
-                  <motion.span
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.2, ease: [0.22, 1, 0.36, 1] }
-                    }
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lilac/25 text-lilac"
-                    aria-hidden="true"
+        <div className="lg:col-span-8 divide-y divide-white/8 border-y border-hairline">
+          {FAQ_ITEMS.map((item, index) => {
+            const isOpen = openIndex === index;
+            const buttonId = `faq-button-${index}`;
+            const panelId = `faq-panel-${index}`;
+
+            return (
+              <div key={item.question}>
+                <h3>
+                  <button
+                    id={buttonId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
-                    <Plus className="h-4 w-4" />
-                  </motion.span>
-                </button>
-              </h3>
+                    <span className="text-sm sm:text-base font-medium text-mist pr-4">
+                      {item.question}
+                    </span>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.2 }
+                      }
+                      className="flex h-7 w-7 shrink-0 items-center justify-center text-mute"
+                      aria-hidden="true"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </motion.span>
+                  </button>
+                </h3>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={buttonId}
-                    initial={
-                      shouldReduceMotion
-                        ? { opacity: 1, height: "auto" }
-                        : { opacity: 0, height: 0 }
-                    }
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={
-                      shouldReduceMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, height: 0 }
-                    }
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
-                    }
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm sm:text-base text-dusk leading-relaxed max-w-[65ch]">
-                      {item.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      initial={
+                        shouldReduceMotion
+                          ? { opacity: 1, height: "auto" }
+                          : { opacity: 0, height: 0 }
+                      }
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={
+                        shouldReduceMotion
+                          ? { opacity: 0 }
+                          : { opacity: 0, height: 0 }
+                      }
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.22 }
+                      }
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-5 text-sm text-dusk leading-relaxed max-w-[60ch]">
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

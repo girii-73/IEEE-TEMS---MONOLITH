@@ -3,9 +3,7 @@ import { EVENT } from "@/data/event";
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "";
-  if (parts.length === 1) {
-    return parts[0][0];
-  }
+  if (parts.length === 1) return parts[0][0];
   return `${parts[0][0]}${parts[1][0]}`;
 }
 
@@ -14,29 +12,29 @@ export function CoordinatorsSection() {
     <section
       id="coordinators"
       aria-labelledby="coordinators-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
+      <div className="section-rule mb-16 md:mb-20" />
+
+      <p className="section-label">Team 09</p>
       <h2
         id="coordinators-heading"
-        className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-mist"
+        className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
       >
-        Student coordinators
+        The people behind it
       </h2>
+      <p className="mt-3 text-sm text-dusk">Student coordinators · IEEE TEMS SEC SBC</p>
 
-      <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-y-8">
+      <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6">
         {EVENT.COORDINATORS.map((name) => (
-          <li key={name} className="flex items-center gap-3.5">
+          <li key={name} className="flex flex-col items-start gap-3">
             <span
               aria-hidden="true"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-lilac/30 text-sm font-semibold text-mist"
-              style={{
-                background:
-                  "linear-gradient(145deg, var(--accent-violet), var(--bg-purple))",
-              }}
+              className="flex h-12 w-12 items-center justify-center border border-edge bg-raised text-xs font-semibold tracking-wider text-mist"
             >
               {getInitials(name)}
             </span>
-            <span className="text-sm sm:text-base font-medium text-mist">
+            <span className="text-sm font-medium text-mist leading-snug">
               {name}
             </span>
           </li>

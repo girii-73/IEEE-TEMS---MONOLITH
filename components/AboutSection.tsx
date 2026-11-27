@@ -1,123 +1,105 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { Compass, Cpu, Network, Sparkles, Users } from "lucide-react";
 import { ABOUT_COPY } from "@/data/event";
-
-const GOAL_ICONS = [Sparkles, Cpu, Users, Compass, Network];
+import FadeContent from "@/components/FadeContent";
+import CountUp from "@/components/CountUp";
+import SplitText from "@/components/SplitText";
 
 const STATS = [
-  { value: "2 Days", label: "Management + Buildathon" },
-  { value: "1000+", label: "Innovators Expected" },
-  { value: "₹17,000+", label: "Total Prize Pool" },
-  { value: "20+", label: "Mentors & Speakers" },
+  { value: 2, label: "Days", suffix: "" },
+  { value: 1000, label: "Innovators", suffix: "+" },
+  { value: 17, label: "Prize Pool", prefix: "₹", suffix: "K+" },
+  { value: 20, label: "Mentors", suffix: "+" },
 ];
 
 export function AboutSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-14">
-        {/* Left Column: Badge, Title, Description, 2x2 Stats */}
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-6"
+      <div className="section-rule mb-16 md:mb-20" />
+
+      <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
+        <FadeContent
+          blur
+          duration={0.8}
+          ease="power2.out"
+          className="lg:col-span-7"
         >
-          <div className="glass-surface-lite inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-lilac">
-            <span className="h-1.5 w-1.5 rounded-full bg-lilac animate-pulse" />
-            About The Festival
-          </div>
-
-          <h2
+          <p className="section-label">About 01</p>
+          <SplitText
+            text="Where innovation meets impact."
+            tag="h2"
+            splitType="words"
+            effect="rise"
+            trigger="view"
+            delay={60}
+            duration={0.55}
+            className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-mist leading-[1.1]"
+          />
+          <p
             id="about-heading"
-            className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
+            className="sr-only"
           >
-            {ABOUT_COPY.title}
-          </h2>
-
-          <p className="mt-5 text-base sm:text-lg text-dusk leading-relaxed">
+            Where innovation meets impact.
+          </p>
+          <p className="mt-6 max-w-xl text-base sm:text-lg text-dusk leading-relaxed">
             {ABOUT_COPY.description}
           </p>
+          <p className="mt-5 max-w-xl text-sm sm:text-base text-mute leading-relaxed">
+            Lead on Day 1. Build on Day 2. Join for one day or both — and leave
+            with a team, a prototype, and a story.
+          </p>
+        </FadeContent>
 
-          {/* 2x2 Stat Boxes */}
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            {STATS.map((stat, idx) => (
-              <motion.div
+        <FadeContent
+          blur
+          duration={0.8}
+          delay={0.15}
+          ease="power2.out"
+          className="lg:col-span-5"
+        >
+          <p className="section-label mb-6">By the Numbers</p>
+          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-hairline bg-hairline">
+            {STATS.map((stat) => (
+              <div
                 key={stat.label}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.5,
-                  delay: idx * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="glass-panel rounded-[12px] p-5 transition-transform duration-300 hover:-translate-y-1"
+                className="bg-void px-5 py-6 sm:px-6 sm:py-7"
               >
-                <p className="font-display text-2xl sm:text-3xl font-bold text-mist tabular-nums">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-xs sm:text-sm font-medium text-lilac">
+                <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
                   {stat.label}
-                </p>
-              </motion.div>
+                </dt>
+                <dd className="mt-2 font-display text-2xl sm:text-3xl font-semibold text-mist tabular-nums tracking-tight">
+                  <CountUp
+                    to={stat.value}
+                    from={0}
+                    duration={1.4}
+                    delay={0.1}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                    className="font-display"
+                  />
+                </dd>
+              </div>
             ))}
-          </div>
-        </motion.div>
+          </dl>
 
-        {/* Right Column: Goals List + Organisers Strip */}
-        <div className="lg:col-span-6 space-y-6">
-          <div className="glass-panel rounded-[14px] p-6 sm:p-8">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-lilac mb-4">
-              Core Objectives
-            </h3>
-            <ul className="divide-y divide-lilac/15">
-              {ABOUT_COPY.goals.map((goal, index) => {
-                const Icon = GOAL_ICONS[index % GOAL_ICONS.length];
-                return (
-                  <motion.li
-                    key={goal}
-                    initial={shouldReduceMotion ? false : { opacity: 0, x: 16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{
-                      duration: 0.45,
-                      delay: index * 0.07,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="flex items-center gap-4 py-3.5 first:pt-1 last:pb-1"
-                  >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-lilac/25 bg-deep/75 text-lilac shadow-[0_0_14px_rgba(139,92,246,0.2)]">
-                      <Icon className="h-4 w-4" aria-hidden="true" />
-                    </span>
-                    <span className="text-sm sm:text-base font-medium text-mist leading-snug">
-                      {goal}
-                    </span>
-                  </motion.li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Organiser Strip */}
-          <div className="glass-surface-lite rounded-[12px] px-5 py-4 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-wider text-dusk">
-            <span className="text-lilac">Sri Sai Ram Engineering College</span>
-            <span>•</span>
-            <span>IEEE</span>
-            <span>•</span>
-            <span>IEEE TEMS</span>
-            <span>•</span>
-            <span>IEEE Madras Section</span>
-          </div>
-        </div>
+          <ul className="mt-8 space-y-3 border-t border-hairline pt-6">
+            {ABOUT_COPY.goals.slice(0, 4).map((goal, i) => (
+              <li
+                key={goal}
+                className="flex gap-3 text-sm text-dusk leading-snug"
+              >
+                <span className="font-display text-xs text-lilac tabular-nums shrink-0 pt-0.5">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>{goal}</span>
+              </li>
+            ))}
+          </ul>
+        </FadeContent>
       </div>
     </section>
   );
