@@ -348,11 +348,11 @@ body {
 }
 
 [data-theme="light"] .laser-drip-layer {
-  opacity: 0.72;
+  opacity: 0.9;
 }
 
 [data-theme="light"] .laser-drip-layer canvas {
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
 }
 
 [data-theme="light"] .section-label {
