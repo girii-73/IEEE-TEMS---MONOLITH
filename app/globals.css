@@ -22,24 +22,47 @@
 }
 
 @theme inline {
-  --color-void: #050816;
-  --color-deep: #0a1030;
-  --color-midnight: #131d52;
-  --color-purple: #2e1a6b;
-  --color-violet: #6d3fe0;
-  --color-amethyst: #8b5cf6;
-  --color-lilac: #b79dfb;
-  --color-mist: #ecebff;
-  --color-dusk: #a9abd8;
+  --color-void: var(--bg-void);
+  --color-deep: var(--bg-deep);
+  --color-midnight: var(--bg-midnight);
+  --color-purple: var(--bg-purple);
+  --color-violet: var(--accent-violet);
+  --color-amethyst: var(--accent-amethyst);
+  --color-lilac: var(--accent-lilac);
+  --color-mist: var(--text-mist);
+  --color-dusk: var(--text-dusk);
 
   --font-display: var(--font-display), system-ui, sans-serif;
   --font-sans: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Frost White (Bright Mode) theme overrides */
+[data-theme="light"] {
+  --bg-void: #f8f8ff;
+  --bg-deep: #f0ebff;
+  --bg-midnight: #e5dcff;
+  --bg-purple: #d8c8ff;
+  --accent-violet: #4b0082;
+  --accent-amethyst: #7b2cbf;
+  --accent-lilac: #5b21b6;
+  --text-mist: #1e0b36;
+  --text-dusk: #4c2a7a;
+
+  --shadow-slab:
+    0 30px 80px -20px rgba(75, 0, 130, 0.25),
+    0 0 42px -12px rgba(155, 114, 207, 0.28);
+  --shadow-panel:
+    0 18px 44px -18px rgba(75, 0, 130, 0.14),
+    0 8px 24px -12px rgba(155, 114, 207, 0.16);
+  --shadow-cta: 0 12px 28px -10px rgba(75, 0, 130, 0.38);
+  --shadow-cta-hover: 0 16px 34px -8px rgba(123, 44, 191, 0.45);
 }
 
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-void);
   color: var(--text-mist);
+  transition: background-color 400ms ease, color 400ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -288,4 +311,132 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ============================================================
+   FROST WHITE (LIGHT MODE) SURFACE & COMPONENT OVERRIDES
+   ============================================================ */
+[data-theme="light"] body {
+  background: radial-gradient(ellipse 100% 60% at 50% 0%, #ffffff 0%, #f8f8ff 45%, #ede4ff 100%);
+  color: var(--text-mist);
+}
+
+[data-theme="light"] .monolith-grid-layer {
+  background-image:
+    linear-gradient(to right, rgba(75, 0, 130, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(75, 0, 130, 0.06) 1px, transparent 1px);
+}
+
+[data-theme="light"] .glass-panel {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.88),
+    rgba(243, 236, 255, 0.82) 55%,
+    rgba(235, 224, 255, 0.88)
+  );
+  border: 1px solid rgba(123, 44, 191, 0.2);
+}
+
+[data-theme="light"] .glass-panel::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.95) 50%,
+    transparent
+  );
+}
+
+[data-theme="light"] .glass-surface-lite {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.86),
+    rgba(240, 232, 255, 0.82) 55%,
+    rgba(232, 220, 255, 0.86)
+  );
+  border: 1px solid rgba(123, 44, 191, 0.2);
+}
+
+[data-theme="light"] .hero-slab {
+  background: linear-gradient(
+    145deg,
+    rgba(155, 114, 207, 0.35) 0%,
+    rgba(123, 44, 191, 0.55) 30%,
+    rgba(75, 0, 130, 0.82) 72%,
+    rgba(49, 0, 92, 0.94) 100%
+  );
+  border: 1px solid rgba(123, 44, 191, 0.42);
+  box-shadow:
+    0 34px 96px -18px rgba(75, 0, 130, 0.32),
+    0 0 60px -16px rgba(155, 114, 207, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="light"] .hero-floor-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(75, 0, 130, 0.45) 50%,
+    transparent
+  );
+}
+
+[data-theme="light"] .hero-slab-reflection {
+  background: linear-gradient(
+    to bottom,
+    rgba(123, 44, 191, 0.22),
+    rgba(75, 0, 130, 0.08) 40%,
+    transparent 85%
+  );
+  border-left-color: rgba(123, 44, 191, 0.2);
+  border-right-color: rgba(123, 44, 191, 0.2);
+}
+
+[data-theme="light"] .nav-glass {
+  background: rgba(248, 248, 255, 0.85);
+  border-bottom: 1px solid rgba(123, 44, 191, 0.16);
+}
+
+[data-theme="light"] .cta-primary {
+  background-color: #4b0082;
+  color: #f8f8ff;
+  border: 1px solid rgba(123, 44, 191, 0.45);
+}
+
+[data-theme="light"] .cta-primary:hover {
+  background-color: #5b1099;
+  border-color: rgba(75, 0, 130, 0.75);
+}
+
+[data-theme="light"] .cta-secondary {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #3d0070;
+  border: 1px solid rgba(123, 44, 191, 0.32);
+}
+
+[data-theme="light"] .cta-secondary:hover {
+  background-color: rgba(155, 114, 207, 0.16);
+  border-color: rgba(75, 0, 130, 0.65);
+}
+
+/* ============================================================
+   HONEYCOMB HEXAGON GRID (PCHacks-inspired Previous Events)
+   ============================================================ */
+.hex-cell {
+  width: 210px;
+  height: 236px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  transition:
+    transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 300ms ease,
+    background-color 300ms ease;
+}
+
+.hex-cell:hover {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.hex-cell-inner {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
