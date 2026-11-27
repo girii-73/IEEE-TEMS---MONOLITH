@@ -11,10 +11,18 @@ function toHandle(name: string) {
 }
 
 const COORDINATOR_AVATARS: Record<string, string> = {
+  "Giriprasad K": "/team/giriprasad.png",
+  Mithrahasini: "/team/mithrahasini.png",
   "Thanishka Yogesh": "/speakers/thanishka.png",
+  Surya: "/team/surya.png",
 };
 
+/** Swap for personal profiles when ready; falls back to org LinkedIn. */
+const COORDINATOR_LINKEDIN: Record<string, string> = {};
+
 export function CoordinatorsSection() {
+  const orgLinkedIn = EVENT.SOCIALS.linkedin;
+
   return (
     <section
       id="coordinators"
@@ -45,6 +53,7 @@ export function CoordinatorsSection() {
               statusColor="#9867e1"
               avatarUrl={COORDINATOR_AVATARS[name]}
               miniAvatarUrl={COORDINATOR_AVATARS[name]}
+              linkedinUrl={COORDINATOR_LINKEDIN[name] ?? orgLinkedIn}
               contactText="Hello"
               showUserInfo
               theme="dark"

@@ -89,8 +89,8 @@ export const EVENT: EventConfig = {
     "Tazim Sheriff R",
     "Mithrahasini",
     "Thanishka Yogesh",
-    "Sathya",
     "Surya",
+    "Sathya",
   ],
   SPEAKER: "To be announced",
 };

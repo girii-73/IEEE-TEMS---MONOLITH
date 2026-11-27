@@ -16,7 +16,7 @@ export function AboutSection({ className = "" }: { className?: string }) {
   return (
     <section
       aria-labelledby="about-heading"
-      className={`relative mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-12 md:pb-32 md:pt-14 ${className}`.trim()}
+      className={`relative mx-auto w-full max-w-6xl px-4 pb-16 pt-2 sm:px-8 sm:pb-24 sm:pt-4 md:pb-32 ${className}`.trim()}
     >
       <div className="grid grid-cols-1 gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-16">
         <FadeContent

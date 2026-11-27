@@ -39,7 +39,7 @@ export default function HomePage() {
             away, About is revealed. Later PullSections (higher z) slide over it.
           */}
           <div className="fixed inset-0 z-0 overflow-y-auto bg-void">
-            <div className="min-h-full pt-24 pb-16 sm:pt-28 sm:pb-20">
+            <div className="nav-clearance min-h-full pb-16 sm:pb-20">
               <AboutSection />
             </div>
           </div>
