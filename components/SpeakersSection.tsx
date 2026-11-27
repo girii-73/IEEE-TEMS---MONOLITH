@@ -30,7 +30,7 @@ export function SpeakersSection() {
           id="speakers-heading"
           className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
         >
-          Keynote
+          Meet Our Speakers
         </h2>
         <p className="mt-3 max-w-lg text-sm text-dusk">
           Industry leaders bridging engineering, product, and management.
@@ -74,10 +74,10 @@ export function SpeakersSection() {
             className="border border-dashed border-edge px-6 py-7"
           >
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
-              Guest {String(slot + 1).padStart(2, "0")}
+              Speaker {String(slot + 1).padStart(2, "0")}
             </p>
             <p className="mt-2 font-display text-lg font-medium text-mist">
-              To be announced
+              To be added
             </p>
           </div>
         ))}

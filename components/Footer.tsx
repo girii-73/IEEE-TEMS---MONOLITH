@@ -28,8 +28,8 @@ export function Footer() {
               <a href="#about" className="text-dusk hover:text-mist transition-colors">
                 About
               </a>
-              <a href="#schedule" className="text-dusk hover:text-mist transition-colors">
-                Timeline
+              <a href="#speakers" className="text-dusk hover:text-mist transition-colors">
+                Speakers
               </a>
               <a href="#passes" className="text-dusk hover:text-mist transition-colors">
                 Register

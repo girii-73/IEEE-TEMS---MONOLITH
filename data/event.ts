@@ -299,39 +299,43 @@ export const PASSES_DATA: PassOption[] = [
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "Who can join?",
+    question: "What is MONOLITH?",
     answer:
-      "Day 1 is open to college students and Day 2 to all engineering students.",
+      "MONOLITH is a two-day IEEE TEMS festival that brings together technology, management, innovation and collaboration. From industry insights and networking to technical challenges and building solutions, MONOLITH offers an opportunity to learn, connect and showcase your skills.",
   },
   {
-    question: "Can I join only one day?",
+    question: "Do I have to attend both days?",
     answer:
-      "Yes, there are passes for each day and a combined pass.",
+      "Not necessarily! You can register for Day 1, Day 2, or choose the Full Festival Pass to experience both days at a discounted price.",
   },
   {
-    question: "How are teams formed?",
+    question: "Who can participate in MONOLITH?",
     answer:
-      "Day 1 teams of 3-4 form during the networking activity; Day 2 teams of 2-4 register together and must include a girl teammate.",
+      "MONOLITH is open to college students from different institutions, departments and academic backgrounds. Whether you're from a technical or management background, you're welcome to participate!",
   },
   {
-    question: "What should I bring?",
-    answer: "Your laptop for Day 2, plus anything you need to build.",
-  },
-  {
-    question: "Can I use AI tools?",
-    answer: "Yes, any language, framework, AI tool or resource.",
-  },
-  {
-    question: "When do I get the Day 2 problem statements?",
-    answer: "They are released on Day 1.",
-  },
-  {
-    question: "Are certificates given?",
+    question: "Can I register without a team?",
     answer:
-      "Day 2 participants receive participation certificates (Day 1 certificate details: to be confirmed).",
+      "Absolutely! You can register individually for Day 1. During the Find Your Co-Founder networking activity, you'll have the opportunity to connect with other participants and form teams for the Team Pitch Challenge.",
   },
   {
-    question: "When and where is it?",
-    answer: `21 and 22 December 2026, 9:00 AM to 4:00 PM each day; ${getDisplayVenue()}.`,
+    question: "Do I need coding experience to participate?",
+    answer:
+      "Not for every activity! Day 1 focuses on management, collaboration, problem-solving and pitching ideas. Day 2 focuses on technology and building solutions. Check the respective event requirements before registering.",
+  },
+  {
+    question: "What happens during the Management Summit?",
+    answer:
+      "Day 1 features an industry speaker session, an interactive networking activity called Find Your Co-Founder, and a Team Pitch Challenge. Participants will identify real-world problems, develop innovative solution concepts and present their ideas to a judging panel.",
+  },
+  {
+    question: "What are the registration fees?",
+    answer:
+      "We offer three registration options: Day 1 – Management Summit: ₹100, Day 2 – Technology Fest: ₹150, and Full Festival Pass – Both Days: ₹200. Choose the pass that best suits your interests and be part of the experience!",
+  },
+  {
+    question: "Will participants receive certificates and prizes?",
+    answer:
+      "MONOLITH features a total proposed prize pool of ₹17,000 across both days. Participation certificates will be provided for both Day 1 and Day 2 participants. Winners will receive prizes based on their performance in the respective competitions.",
   },
 ];

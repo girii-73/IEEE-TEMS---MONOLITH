@@ -9,7 +9,6 @@ import SquishSwitch from "@/components/SquishSwitch.jsx";
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#days", label: "Days" },
-  { href: "#schedule", label: "Timeline" },
   { href: "#prizes", label: "Prizes" },
   { href: "#passes", label: "Passes" },
   { href: "#speakers", label: "Speakers" },
