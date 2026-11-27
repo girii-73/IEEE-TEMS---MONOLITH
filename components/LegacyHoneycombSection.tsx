@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import FlexCarousel, { type FlexCarouselItem } from "@/components/FlexCarousel";
 
@@ -92,6 +92,15 @@ export function LegacyHoneycombSection() {
   const shouldReduceMotion = useReducedMotion();
   const [focusIndex, setFocusIndex] = useState(MONOLITH_INDEX);
   const [activeOffset, setActiveOffset] = useState(0);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const sync = () => setCompact(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   const orderedEvents = useMemo(() => {
     if (focusIndex === 0) return LEGACY_EVENTS;
@@ -116,17 +125,17 @@ export function LegacyHoneycombSection() {
     <section
       id="legacy"
       aria-labelledby="legacy-heading"
-      className="relative w-full py-24 md:py-32"
+      className="relative w-full overflow-x-clip py-16 sm:py-24 md:py-32"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="section-rule mb-16 md:mb-20" />
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.55 }}
-          className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+          className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
             <p className="section-label">Glimpse 07</p>
@@ -137,7 +146,7 @@ export function LegacyHoneycombSection() {
               Our legacy
             </h2>
             <p className="mt-3 max-w-md text-sm text-dusk">
-              Milestones from IEEE TEMS SEC SBC — drag or scroll the filmstrip.
+              Milestones from IEEE TEMS SEC SBC — swipe the filmstrip.
             </p>
           </div>
           <p className="text-xs text-mute">
@@ -155,7 +164,7 @@ export function LegacyHoneycombSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.6, delay: 0.05 }}
-        className="relative mt-10 h-[min(62vh,560px)] w-full min-h-[320px] sm:mt-14 sm:min-h-[400px]"
+        className="relative mt-8 h-[min(42vh,320px)] w-full min-h-[240px] sm:mt-14 sm:h-[min(62vh,560px)] sm:min-h-[400px]"
       >
         <FlexCarousel
           key={focusIndex}
@@ -163,39 +172,41 @@ export function LegacyHoneycombSection() {
           preset="liquid"
           intro={shouldReduceMotion ? "none" : "rise"}
           fit="landscape"
-          cardHeight={0.48}
-          gap={14}
-          radius={14}
+          cardHeight={compact ? 0.58 : 0.48}
+          gap={compact ? 10 : 14}
+          radius={compact ? 12 : 14}
           squeeze={0.18}
           autoplay={!shouldReduceMotion}
           interval={4.5}
           captions
           focusOnClick
-          captureWheel
+          captureWheel={!compact}
           onChange={(index) => setActiveOffset(index)}
           className="h-full w-full"
         />
       </motion.div>
 
-      <div className="mx-auto mt-8 flex max-w-6xl flex-wrap items-center justify-center gap-2 px-5 sm:px-8">
-        {LEGACY_EVENTS.map((ev, index) => (
-          <button
-            key={ev.id}
-            type="button"
-            onClick={() => {
-              setFocusIndex(index);
-              setActiveOffset(0);
-            }}
-            aria-pressed={index === absoluteActive}
-            className={`rounded-full px-3.5 py-1.5 text-[11px] font-medium tracking-tight transition-colors ${
-              index === absoluteActive
-                ? "bg-mist text-void"
-                : "border border-hairline text-dusk hover:border-edge hover:text-mist"
-            }`}
-          >
-            {ev.year} · {ev.title}
-          </button>
-        ))}
+      <div className="mx-auto mt-6 max-w-6xl px-4 sm:mt-8 sm:px-8">
+        <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:flex-wrap sm:justify-center sm:overflow-visible">
+          {LEGACY_EVENTS.map((ev, index) => (
+            <button
+              key={ev.id}
+              type="button"
+              onClick={() => {
+                setFocusIndex(index);
+                setActiveOffset(0);
+              }}
+              aria-pressed={index === absoluteActive}
+              className={`shrink-0 rounded-full px-3.5 py-2 text-[11px] font-medium tracking-tight transition-colors ${
+                index === absoluteActive
+                  ? "bg-mist text-void"
+                  : "border border-hairline text-dusk hover:border-edge hover:text-mist"
+              }`}
+            >
+              {ev.year} · {ev.title}
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

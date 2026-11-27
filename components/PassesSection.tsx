@@ -13,9 +13,9 @@ export function PassesSection() {
     <section
       id="passes"
       aria-labelledby="passes-heading"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
       <FadeContent blur duration={0.7} className="max-w-2xl">
         <p className="section-label">Register 05</p>
@@ -38,7 +38,7 @@ export function PassesSection() {
         </p>
       </FadeContent>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 md:grid-cols-3">
         {PASSES_DATA.map((pass, idx) => {
           const url = EVENT.REG_URLS[pass.urlKey].trim();
           const hasUrl = url.length > 0;
@@ -91,7 +91,7 @@ export function PassesSection() {
                             href={url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group inline-flex w-full items-center justify-between gap-2 border border-void/20 bg-void px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-transparent hover:text-void"
+                            className="group inline-flex min-h-12 w-full items-center justify-between gap-2 border border-void/20 bg-void px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-transparent hover:text-void"
                           >
                             <span>{pass.buttonLabel}</span>
                             <ArrowUpRight
@@ -149,7 +149,7 @@ export function PassesSection() {
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group inline-flex w-full items-center justify-between gap-2 border border-edge px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-mist hover:text-void"
+                          className="group inline-flex min-h-12 w-full items-center justify-between gap-2 border border-edge px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-mist hover:text-void"
                         >
                           <span>{pass.buttonLabel}</span>
                           <ArrowUpRight

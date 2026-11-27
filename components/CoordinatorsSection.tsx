@@ -15,9 +15,9 @@ export function CoordinatorsSection() {
     <section
       id="coordinators"
       aria-labelledby="coordinators-heading"
-      className="mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-24 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-12 sm:mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
       <p className="section-label">Team 09</p>
       <h2
@@ -30,7 +30,7 @@ export function CoordinatorsSection() {
         Student coordinators · IEEE TEMS SEC SBC
       </p>
 
-      <ul className="mt-10 grid grid-cols-1 justify-items-center gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-8 grid grid-cols-2 justify-items-center gap-3 sm:mt-12 sm:gap-8 lg:grid-cols-3">
         {EVENT.COORDINATORS.map((name) => (
           <li key={name} className="w-full max-w-[280px]">
             <ProfileCard
@@ -49,6 +49,7 @@ export function CoordinatorsSection() {
               parallax={6}
               radius={14}
               enableTilt
+              enableMobileTilt={false}
               intro
               onContactClick={() => {
                 window.location.href = `mailto:${EVENT.CONTACT.email}`;

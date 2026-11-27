@@ -1,10 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/MotionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { EVENT, getDisplayVenue } from "@/data/event";
 import { cn } from "@/lib/utils";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#07040d" },
+    { media: "(prefers-color-scheme: light)", color: "#f8f8ff" },
+  ],
+};
 
 /* Limegreen.studio pairing: Instrument Sans + Newsreader italic */
 const instrumentSans = Instrument_Sans({

@@ -20,6 +20,36 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+@media (max-width: 639px) {
+  .profile-card {
+    max-width: 100%;
+  }
+
+  .profile-card__body {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .profile-card__name {
+    font-size: 15px;
+  }
+
+  .profile-card__title {
+    font-size: 12px;
+  }
+
+  .profile-card__handle,
+  .profile-card__status {
+    font-size: 11px;
+  }
+
+  .profile-card__contact {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+}
+
 .profile-card__body {
   position: relative;
   display: flex;

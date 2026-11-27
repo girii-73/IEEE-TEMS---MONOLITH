@@ -17,11 +17,11 @@ export function AboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="relative mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
-      <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
+      <div className="grid grid-cols-1 gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-16">
         <FadeContent
           blur
           duration={0.8}
@@ -66,7 +66,7 @@ export function AboutSection() {
             {STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="bg-void px-5 py-6 sm:px-6 sm:py-7"
+                className="bg-void px-4 py-5 sm:px-6 sm:py-7"
               >
                 <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
                   {stat.label}

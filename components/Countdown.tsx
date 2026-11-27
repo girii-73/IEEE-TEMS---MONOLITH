@@ -48,18 +48,18 @@ export function Countdown() {
 
   return (
     <div
-      className="flex flex-wrap items-stretch justify-center gap-2 sm:gap-3"
+      className="grid w-full grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-stretch sm:justify-center sm:gap-3"
       aria-label="Countdown to event"
     >
       {cells.map((cell) => (
         <div
           key={cell.label}
-          className="countdown-cell flex flex-col items-center justify-center rounded-md px-3 py-3 sm:px-4 sm:py-3.5"
+          className="countdown-cell flex min-w-0 flex-col items-center justify-center rounded-md px-1.5 py-2.5 sm:px-4 sm:py-3.5"
         >
-          <span className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-mist tabular-nums leading-none">
+          <span className="font-display text-xl font-semibold tracking-tight text-mist tabular-nums leading-none sm:text-3xl">
             {ready ? pad(cell.value) : "––"}
           </span>
-          <span className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
+          <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-mute sm:mt-1.5 sm:text-[10px] sm:tracking-[0.18em]">
             {cell.label}
           </span>
         </div>

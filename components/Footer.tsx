@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-hairline">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-8 sm:py-16 pb-[max(3rem,env(safe-area-inset-bottom))]">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <span className="font-display text-sm font-semibold tracking-[0.18em] text-mist">
@@ -20,7 +20,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-10">
             <div className="flex flex-col gap-2 text-sm">
               <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
                 Explore

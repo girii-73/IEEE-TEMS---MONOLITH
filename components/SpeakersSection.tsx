@@ -15,9 +15,9 @@ export function SpeakersSection() {
     <section
       id="speakers"
       aria-labelledby="speakers-heading"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
@@ -42,14 +42,14 @@ export function SpeakersSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55, delay: 0.08 }}
-        className="mt-12 grid grid-cols-1 gap-8 border border-hairline p-7 sm:p-10 lg:grid-cols-[10rem_1fr] lg:gap-12"
+        className="mt-8 grid grid-cols-1 gap-6 border border-hairline p-5 sm:mt-12 sm:gap-8 sm:p-10 lg:grid-cols-[10rem_1fr] lg:gap-12"
       >
-        <div className="flex h-36 w-36 items-center justify-center border border-hairline bg-raised sm:h-40 sm:w-40">
+        <div className="flex h-28 w-28 items-center justify-center border border-hairline bg-raised sm:h-40 sm:w-40">
           <span className="font-display text-3xl font-semibold text-mute">TS</span>
         </div>
 
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-lilac">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-lilac sm:tracking-[0.18em]">
             Featured · Day 1 · 40–45 min + Q&amp;A
           </p>
           <h3 className="mt-3 font-display text-2xl sm:text-3xl font-semibold text-mist tracking-tight">

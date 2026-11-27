@@ -45,8 +45,6 @@ const STIFFNESS = 180;
 const DAMPING = 19;
 const KICK = 0.024;
 
-const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
-
 const fontsAreLoaded = (): boolean =>
   typeof document !== 'undefined' && (!document.fonts || document.fonts.status === 'loaded');
 
@@ -113,10 +111,10 @@ const SplitText = ({
   const completedTextRef = useRef<string | null>(null);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const liveRef = useRef({ trigger, hoverEffect, accentColor });
-  const [fontsLoaded, setFontsLoaded] = useState(fontsAreLoaded);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
   const [ready, setReady] = useState(false);
 
-  useIsoLayoutEffect(() => {
+  useLayoutEffect(() => {
     onCompleteRef.current = onLetterAnimationComplete;
     liveRef.current = { trigger, hoverEffect, accentColor };
   });
@@ -124,6 +122,10 @@ const SplitText = ({
   useEffect(() => {
     if (fontsLoaded) return undefined;
     let active = true;
+    if (!document.fonts) {
+      setFontsLoaded(true);
+      return undefined;
+    }
     document.fonts.ready.then(() => {
       if (active) setFontsLoaded(true);
     });

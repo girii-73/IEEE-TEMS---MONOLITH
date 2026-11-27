@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export type ThemeMode = "dark" | "light";
 
@@ -14,35 +20,28 @@ const ThemeContext = createContext<ThemeContextValue>({
   toggleTheme: () => {},
 });
 
-const listeners = new Set<() => void>();
-
-function subscribe(callback: () => void) {
-  listeners.add(callback);
-  return () => listeners.delete(callback);
-}
-
-function getSnapshot(): ThemeMode {
-  const saved = window.localStorage.getItem("monolith-theme");
-  return saved === "light" ? "light" : "dark";
-}
-
-function getServerSnapshot(): ThemeMode {
-  return "dark";
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [theme, setTheme] = useState<ThemeMode>("dark");
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("monolith-theme");
+    const next: ThemeMode = saved === "light" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.setAttribute("data-theme", next);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    const next: ThemeMode = theme === "dark" ? "light" : "dark";
-    window.localStorage.setItem("monolith-theme", next);
-    document.documentElement.setAttribute("data-theme", next);
-    listeners.forEach((listener) => listener());
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next: ThemeMode = prev === "dark" ? "light" : "dark";
+      window.localStorage.setItem("monolith-theme", next);
+      document.documentElement.setAttribute("data-theme", next);
+      return next;
+    });
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

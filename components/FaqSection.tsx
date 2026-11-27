@@ -13,11 +13,11 @@ export function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+      <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <p className="section-label">FAQ 08</p>
           <h2
@@ -46,7 +46,7 @@ export function FaqSection() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                    className="flex min-h-12 w-full items-center justify-between gap-3 py-4 text-left sm:gap-4 sm:py-5"
                   >
                     <span className="text-sm sm:text-base font-medium text-mist pr-4">
                       {item.question}

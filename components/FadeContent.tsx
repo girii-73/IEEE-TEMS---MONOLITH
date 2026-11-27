@@ -41,7 +41,6 @@ interface Look {
   share: number;
 }
 
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -215,7 +214,7 @@ const FadeContent = ({
   const callbacksRef = useRef({ onStart, onComplete, onDisappearanceComplete });
   callbacksRef.current = { onStart, onComplete, onDisappearanceComplete };
 
-  useIsomorphicLayoutEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return undefined;
 

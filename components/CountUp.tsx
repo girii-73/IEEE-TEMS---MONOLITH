@@ -65,7 +65,6 @@ const UNITS: [number, string][] = [
   [1e6, 'M'],
   [1e3, 'K']
 ];
-const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const smooth = (edge0: number, edge1: number, value: number) => {
@@ -234,7 +233,7 @@ export default function CountUp({
   const [initialText] = useState(() => formatValue(startValue));
   const latestRef = useRef<Live | null>(null);
 
-  useIsoLayoutEffect(() => {
+  useLayoutEffect(() => {
     latestRef.current = {
       formatValue,
       onStart,
@@ -247,7 +246,7 @@ export default function CountUp({
     };
   });
 
-  useIsoLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (!startedRef.current) valueRef.current = startValue;
     if (mode === 'count' && !runningRef.current && textRef.current) {
       textRef.current.textContent = formatValue(valueRef.current);

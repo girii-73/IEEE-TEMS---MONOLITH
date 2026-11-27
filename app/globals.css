@@ -151,6 +151,18 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-void);
   color: var(--text-primary);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.nav-safe-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 640px) {
+  .nav-safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top, 0px));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -167,6 +179,7 @@ body {
   overflow-x: clip;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
@@ -405,9 +418,15 @@ body {
 }
 
 .countdown-cell {
-  min-width: 4.5rem;
+  min-width: 0;
   background: rgba(184, 146, 255, 0.06);
   border: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 640px) {
+  .countdown-cell {
+    min-width: 4.5rem;
+  }
 }
 
 @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {

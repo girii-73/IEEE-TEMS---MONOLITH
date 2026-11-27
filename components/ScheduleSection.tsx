@@ -6,9 +6,14 @@ import { SCHEDULE_DATA } from "@/data/event";
 
 type DayKey = "day1" | "day2";
 
-const TABS: { key: DayKey; label: string; date: string }[] = [
-  { key: "day1", label: "Day 01 — Summit", date: "21 Dec" },
-  { key: "day2", label: "Day 02 — Sprint", date: "22 Dec" },
+const TABS: {
+  key: DayKey;
+  label: string;
+  shortLabel: string;
+  date: string;
+}[] = [
+  { key: "day1", label: "Day 01 — Summit", shortLabel: "Day 1", date: "21 Dec" },
+  { key: "day2", label: "Day 02 — Sprint", shortLabel: "Day 2", date: "22 Dec" },
 ];
 
 export function ScheduleSection() {
@@ -29,11 +34,11 @@ export function ScheduleSection() {
     <section
       id="schedule"
       aria-labelledby="schedule-heading"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
-      <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-6 sm:gap-8 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="section-label">Timeline 03</p>
           <h2
@@ -48,7 +53,7 @@ export function ScheduleSection() {
         <div
           role="tablist"
           aria-label="Festival days"
-          className="inline-flex self-start border border-hairline"
+          className="grid w-full grid-cols-2 border border-hairline sm:inline-flex sm:w-auto sm:self-start"
         >
           {TABS.map((tab, idx) => {
             const selected = activeDay === tab.key;
@@ -63,13 +68,16 @@ export function ScheduleSection() {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setActiveDay(tab.key)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`px-4 py-2.5 text-left transition-colors ${
+                className={`min-h-12 px-3 py-2.5 text-left transition-colors sm:px-4 ${
                   selected
                     ? "bg-mist text-void"
                     : "text-dusk hover:text-mist hover:bg-raised"
                 }`}
               >
-                <span className="block text-[11px] font-semibold uppercase tracking-[0.12em]">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] sm:hidden">
+                  {tab.shortLabel}
+                </span>
+                <span className="hidden text-[11px] font-semibold uppercase tracking-[0.12em] sm:block">
                   {tab.label}
                 </span>
                 <span
@@ -95,13 +103,13 @@ export function ScheduleSection() {
           animate={{ opacity: 1, y: 0 }}
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
           transition={{ duration: 0.25 }}
-          className="relative mt-12 border-l border-hairline pl-8 sm:pl-10"
+          className="relative mt-10 border-l border-hairline pl-6 sm:mt-12 sm:pl-10"
         >
           {items.map((item, idx) => (
             <li key={`${activeDay}-${item.time}-${item.title}`} className="relative pb-8 last:pb-0">
               <span
                 aria-hidden="true"
-                className="absolute -left-[2.05rem] sm:-left-[2.55rem] top-1.5 h-2.5 w-2.5 rounded-full border border-lilac bg-void"
+                className="absolute -left-[1.55rem] sm:-left-[2.55rem] top-1.5 h-2.5 w-2.5 rounded-full border border-lilac bg-void"
               />
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                 <div>

@@ -9,9 +9,9 @@ export function DaysSection() {
     <section
       id="days"
       aria-labelledby="days-heading"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
+      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
     >
-      <div className="section-rule mb-16 md:mb-20" />
+      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
       <FadeContent blur duration={0.7}>
         <p className="section-label">Domains 02</p>
@@ -35,8 +35,8 @@ export function DaysSection() {
 
       <div className="mt-14 grid grid-cols-1 gap-0 border border-hairline lg:grid-cols-2">
         {/* Day 1 */}
-        <article className="border-b border-hairline p-7 sm:p-10 lg:border-b-0 lg:border-r">
-          <div className="flex items-baseline justify-between gap-4">
+        <article className="border-b border-hairline p-5 sm:p-10 lg:border-b-0 lg:border-r">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-lilac">
               {DAYS_COPY.day1.label}
             </span>
@@ -72,8 +72,8 @@ export function DaysSection() {
         </article>
 
         {/* Day 2 */}
-        <article className="p-7 sm:p-10">
-          <div className="flex items-baseline justify-between gap-4">
+        <article className="p-5 sm:p-10">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-lilac">
               {DAYS_COPY.day2.label}
             </span>
@@ -103,15 +103,15 @@ export function DaysSection() {
       </div>
 
       {/* Themes — numbered like PEC Domains */}
-      <div className="mt-20 md:mt-24">
+      <div className="mt-14 sm:mt-20 md:mt-24">
         <h3 className="font-display text-xl sm:text-2xl font-semibold tracking-tight text-mist">
           Day 2 tracks
         </h3>
-        <div className="mt-8 divide-y divide-hairline border-y border-hairline">
+        <div className="mt-6 divide-y divide-hairline border-y border-hairline sm:mt-8">
           {DAY2_THEMES.map((theme, i) => (
             <div
               key={theme.id}
-              className="grid grid-cols-[3rem_1fr] gap-4 py-6 sm:grid-cols-[4rem_1fr_1.2fr] sm:gap-8 sm:items-baseline"
+              className="grid grid-cols-[2.5rem_1fr] gap-3 py-5 sm:grid-cols-[4rem_1fr_1.2fr] sm:items-baseline sm:gap-8 sm:py-6"
             >
               <span className="font-display text-sm text-lilac tabular-nums">
                 {String(i + 1).padStart(2, "0")}

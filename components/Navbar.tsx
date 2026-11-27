@@ -33,12 +33,17 @@ export function Navbar() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
     };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [open]);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+    <header className="nav-safe-top pointer-events-none fixed inset-x-0 top-0 z-50 px-3 sm:px-5">
       <a
         href="#main-content"
         className="pointer-events-auto sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-[60] focus:rounded-md focus:bg-mist focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-void"
@@ -47,13 +52,13 @@ export function Navbar() {
       </a>
 
       <div
-        className={`pointer-events-auto mx-auto flex max-w-6xl items-center gap-2 rounded-full border border-white/60 bg-[#f5f5f3]/95 px-3 py-2 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:px-4 ${
+        className={`pointer-events-auto mx-auto flex w-full max-w-6xl items-center gap-2 rounded-full border border-white/60 bg-[#f5f5f3]/95 px-2.5 py-1.5 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:px-4 sm:py-2 ${
           scrolled ? "bg-[#f8f8f6]/97 shadow-[0_14px_44px_-16px_rgba(0,0,0,0.6)]" : ""
         }`}
       >
         <nav
           aria-label="Primary"
-          className="hidden flex-1 items-center justify-start gap-0.5 lg:flex"
+          className="hidden min-w-0 flex-1 items-center justify-start gap-0.5 lg:flex"
         >
           {NAV_LINKS.map((link) => (
             <a
@@ -66,14 +71,14 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
           <button
             type="button"
             onClick={toggleTheme}
             aria-label={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#1a1a1a] transition-colors hover:bg-black/5"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[#1a1a1a] transition-colors hover:bg-black/5"
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4" aria-hidden="true" />
@@ -115,7 +120,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-auto mx-auto mt-2 max-w-6xl overflow-hidden rounded-[28px] border border-white/60 bg-[#f5f5f3]/95 px-4 py-3 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl lg:hidden"
+            className="pointer-events-auto mx-auto mt-2 max-h-[min(80svh,calc(100svh-5rem))] w-full max-w-6xl overflow-y-auto overscroll-contain rounded-[24px] border border-white/60 bg-[#f5f5f3]/97 px-4 py-3 shadow-[0_10px_40px_-18px_rgba(0,0,0,0.55)] backdrop-blur-xl lg:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col">
               {NAV_LINKS.map((link) => (
@@ -123,7 +128,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="border-b border-black/5 py-3.5 text-sm font-medium tracking-tight text-[#1a1a1a] transition-opacity hover:opacity-70 last:border-b-0"
+                  className="border-b border-black/5 py-3.5 text-base font-medium tracking-tight text-[#1a1a1a] transition-opacity hover:opacity-70 last:border-b-0"
                 >
                   {link.label}
                 </a>
@@ -131,7 +136,7 @@ export function Navbar() {
               <a
                 href="#passes"
                 onClick={() => setOpen(false)}
-                className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-full bg-[#121212] px-5 py-3 text-sm font-medium text-[#f8f8ff] transition-colors hover:bg-[#2a2a2a]"
+                className="mt-3 flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full bg-[#121212] px-5 py-3 text-sm font-medium text-[#f8f8ff] transition-colors hover:bg-[#2a2a2a]"
               >
                 Register
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
