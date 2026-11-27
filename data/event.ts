@@ -87,8 +87,8 @@ export const EVENT: EventConfig = {
   COORDINATORS: [
     "Giriprasad K",
     "Tazim Sheriff R",
-    "Thanishka Yogesh",
     "Mithrahasini",
+    "Thanishka Yogesh",
     "Sathya",
     "Surya",
   ],
@@ -339,3 +339,42 @@ export const FAQ_ITEMS: FaqItem[] = [
       "MONOLITH features a total proposed prize pool of ₹17,000 across both days. Participation certificates will be provided for both Day 1 and Day 2 participants. Winners will receive prizes based on their performance in the respective competitions.",
   },
 ];
+
+export interface PartnerSlot {
+  id: string;
+  name: string;
+  tier: "title" | "gold" | "silver" | "partner";
+  logo?: string;
+  href?: string;
+}
+
+/** Placeholder slots — swap names/logos when sponsorships lock in. */
+export const SPONSORS: PartnerSlot[] = [
+  { id: "title-1", name: "Title Sponsor", tier: "title" },
+  { id: "gold-1", name: "Gold Sponsor", tier: "gold" },
+  { id: "gold-2", name: "Gold Sponsor", tier: "gold" },
+  { id: "silver-1", name: "Silver Sponsor", tier: "silver" },
+  { id: "silver-2", name: "Silver Sponsor", tier: "silver" },
+  { id: "silver-3", name: "Silver Sponsor", tier: "silver" },
+];
+
+export const PARTNERS: PartnerSlot[] = [
+  { id: "partner-1", name: "Community Partner", tier: "partner" },
+  { id: "partner-2", name: "Media Partner", tier: "partner" },
+  { id: "partner-3", name: "Tech Partner", tier: "partner" },
+  { id: "partner-4", name: "Outreach Partner", tier: "partner" },
+];
+
+/** Community partner marks for the LogoLoop marquee — add `logo` when assets land. */
+export const COMMUNITY_PARTNERS: PartnerSlot[] = [
+  { id: "cp-1", name: "IEEE TEMS", tier: "partner" },
+  { id: "cp-2", name: "Student Branch", tier: "partner" },
+  { id: "cp-3", name: "Dev Collective", tier: "partner" },
+  { id: "cp-4", name: "Campus Hub", tier: "partner" },
+  { id: "cp-5", name: "Open Source Guild", tier: "partner" },
+  { id: "cp-6", name: "Maker Lab", tier: "partner" },
+  { id: "cp-7", name: "Women in Tech", tier: "partner" },
+  { id: "cp-8", name: "Startup Circle", tier: "partner" },
+];
+
+

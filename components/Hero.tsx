@@ -8,6 +8,7 @@ import Magnet from "@/components/Magnet";
 import DotGrid from "@/components/DotGrid";
 import LaserFlow from "@/components/LaserFlow";
 import PixelTrail from "@/components/PixelTrail.jsx";
+import { useTheme } from "@/components/ThemeProvider";
 
 function useIsCompact() {
   const [compact, setCompact] = useState(false);
@@ -27,6 +28,8 @@ export function Hero() {
   const venue = getDisplayVenue();
   const laserSurfaceRef = useRef<HTMLDivElement>(null);
   const compact = useIsCompact();
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section
@@ -41,12 +44,12 @@ export function Hero() {
         aria-hidden="true"
       >
         {!compact && (
-          <div className="absolute inset-0 opacity-40">
+          <div className={`absolute inset-0 ${isLight ? "opacity-30" : "opacity-40"}`}>
             <DotGrid
               dotSize={3}
               gap={30}
-              baseColor="#2a1a45"
-              activeColor="#9867e1"
+              baseColor={isLight ? "#c4b5e0" : "#2a1a45"}
+              activeColor={isLight ? "#4c1d95" : "#9867e1"}
               proximity={130}
               shockRadius={260}
               shockStrength={2.5}
@@ -65,12 +68,12 @@ export function Hero() {
               trailSize={0.09}
               maxAge={420}
               interpolate={5}
-              color="#9867e1"
-              trailColor="#5f279e"
+              color={isLight ? "#4c1d95" : "#9867e1"}
+              trailColor={isLight ? "#2e1065" : "#5f279e"}
               gooeyFilter={{ strength: 2 }}
-              glow={0.45}
-              shine={0.55}
-              sparkle={0.15}
+              glow={isLight ? 0.28 : 0.45}
+              shine={isLight ? 0.35 : 0.55}
+              sparkle={isLight ? 0.08 : 0.15}
             />
           </div>
         )}
@@ -78,18 +81,18 @@ export function Hero() {
         <div className="laser-drip-layer pointer-events-none absolute inset-0 z-[2]">
           <LaserFlow
             surfaceRef={laserSurfaceRef}
-            color="#9867e1"
-            theme="dark"
-            intensity={compact ? 0.8 : 1.8}
+            color={isLight ? "#3b0764" : "#9867e1"}
+            theme={isLight ? "light" : "dark"}
+            intensity={compact ? (isLight ? 0.55 : 0.8) : isLight ? 1.05 : 1.8}
             beamWidth={compact ? 0.95 : 2.0}
-            flare={compact ? 0.48 : 1.25}
-            spread={compact ? 0.5 : 1.3}
-            spill={compact ? 0.45 : 1.05}
-            fog={compact ? 0 : 0.1}
-            dust={compact ? 0 : 1.0}
-            streaks={compact ? 0.22 : 1.35}
-            dots={compact ? 0 : 0.65}
-            pulse={compact ? 0.3 : 1.1}
+            flare={compact ? 0.48 : isLight ? 0.7 : 1.25}
+            spread={compact ? 0.5 : isLight ? 0.85 : 1.3}
+            spill={compact ? 0.45 : isLight ? 0.55 : 1.05}
+            fog={compact ? 0 : isLight ? 0.04 : 0.1}
+            dust={compact ? 0 : isLight ? 0.45 : 1.0}
+            streaks={compact ? 0.22 : isLight ? 0.7 : 1.35}
+            dots={compact ? 0 : isLight ? 0.3 : 0.65}
+            pulse={compact ? 0.3 : isLight ? 0.65 : 1.1}
             speed={compact ? 0.5 : 1}
             beamPosition={0.5}
             surfaceLevel={0.72}

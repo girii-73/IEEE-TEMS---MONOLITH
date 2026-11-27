@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="80" viewBox="0 0 800 80" fill="none">
+  <defs>
+    <linearGradient id="strap" x1="0" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5f279e"/>
+      <stop offset="0.5" stop-color="#9867e1"/>
+      <stop offset="1" stop-color="#5f279e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="80" fill="url(#strap)"/>
+  <text x="400" y="48" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="8" fill="#f8f8ff">MONOLITH</text>
+</svg>

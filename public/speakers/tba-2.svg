@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15101c"/>
+      <stop offset="1" stop-color="#241536"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="900" rx="48" fill="url(#bg)" stroke="#9867e1" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="320" cy="280" r="88" fill="#1e1528" stroke="#5f279e" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="320" y="295" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#958e9d">03</text>
+  <text x="320" y="520" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="600" fill="#f8f8ff">To be added</text>
+  <text x="320" y="575" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="20" fill="#958e9d">Speaker slot</text>
+  <text x="320" y="700" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" letter-spacing="3" fill="#9867e1">MONOLITH 2026</text>
+</svg>

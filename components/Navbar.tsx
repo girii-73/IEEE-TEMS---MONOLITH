@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "#prizes", label: "Prizes" },
   { href: "#passes", label: "Passes" },
   { href: "#speakers", label: "Speakers" },
+  { href: "#sponsors", label: "Sponsors" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -83,6 +84,7 @@ export function Navbar() {
             ariaLabel={
               theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
+            themeIcons
             width={52}
             height={28}
             radius={14}
@@ -90,10 +92,10 @@ export function Navbar() {
             stretch={28}
             hoverScale={1.04}
             colorDuration={280}
-            trackColor="#2a1a45"
-            trackOnColor="#f4ecff"
-            thumbColor="#9867e1"
-            thumbOnColor="#4b0082"
+            trackColor={theme === "light" ? "#3b2660" : "#2a1a45"}
+            trackOnColor={theme === "light" ? "#ddd6fe" : "#f4ecff"}
+            thumbColor={theme === "light" ? "#5b21b6" : "#9867e1"}
+            thumbOnColor={theme === "light" ? "#2e1065" : "#4b0082"}
           />
 
           <a
