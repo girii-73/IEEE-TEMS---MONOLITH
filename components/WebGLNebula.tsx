@@ -78,29 +78,25 @@ void main() {
   float n1 = fbm(p + vec2(t * 0.2, t * 0.1));
   float n2 = fbm(p * 1.5 - vec2(t * 0.15, -t * 0.2) + n1);
 
-  vec3 deepVoid = vec3(0.027, 0.015, 0.051);
-  vec3 deepPurple = vec3(0.294, 0.0, 0.510);
-  vec3 lavender = vec3(0.608, 0.447, 0.812);
-  vec3 brightViolet = vec3(0.722, 0.573, 1.0);
+  // Near-black atmosphere with restrained violet wash — PEC Hacks quiet premium
+  vec3 deepVoid = vec3(0.02, 0.02, 0.02);
+  vec3 softViolet = vec3(0.35, 0.28, 0.48);
+  vec3 coolGray = vec3(0.12, 0.12, 0.14);
 
-  vec3 nebula = mix(deepVoid, deepPurple, smoothstep(0.15, 0.85, n1));
-  nebula += lavender * pow(n2, 2.5) * 0.75;
+  vec3 nebula = mix(deepVoid, coolGray, smoothstep(0.2, 0.9, n1) * 0.55);
+  nebula += softViolet * pow(n2, 3.0) * 0.22;
 
-  float centerGlow = exp(-length(uv * vec2(1.8, 1.0)) * 2.2);
-  nebula += brightViolet * centerGlow * 0.35;
+  float centerGlow = exp(-length(uv * vec2(1.6, 1.1)) * 2.4);
+  nebula += softViolet * centerGlow * 0.12;
 
-  vec2 starGrid = fract(uv * 28.0) - 0.5;
-  vec2 starId = floor(uv * 28.0);
+  vec2 starGrid = fract(uv * 32.0) - 0.5;
+  vec2 starId = floor(uv * 32.0);
   float starRand = hash(starId);
-  float starBright = smoothstep(0.48, 0.0, length(starGrid)) * step(0.88, starRand);
-  starBright *= 0.4 + 0.6 * sin(u_time * (2.0 + starRand * 4.0) + starRand * 6.28);
+  float starBright = smoothstep(0.45, 0.0, length(starGrid)) * step(0.9, starRand);
+  starBright *= 0.35 + 0.65 * sin(u_time * (1.6 + starRand * 3.0) + starRand * 6.28);
 
-  vec2 dustGrid = fract(uv * 65.0 + vec2(sin(u_time * 0.1), cos(u_time * 0.08))) - 0.5;
-  float dustRand = hash(floor(uv * 65.0));
-  float dust = smoothstep(0.4, 0.0, length(dustGrid)) * step(0.94, dustRand) * 0.5;
-
-  vec3 col = nebula + vec3(0.97, 0.97, 1.0) * starBright + lavender * dust;
-  float vig = smoothstep(1.6, 0.3, length(uv));
+  vec3 col = nebula + vec3(0.92, 0.92, 0.95) * starBright * 0.85;
+  float vig = smoothstep(1.7, 0.35, length(uv));
   col *= vig;
 
   gl_FragColor = vec4(col, 1.0);
@@ -163,7 +159,7 @@ void main() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-90 mix-blend-screen transition-opacity duration-500 [[data-theme='light']_&]:opacity-15 [[data-theme='light']_&]:mix-blend-multiply"
+      className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-55 mix-blend-screen transition-opacity duration-500 [[data-theme='light']_&]:opacity-10 [[data-theme='light']_&]:mix-blend-multiply"
     />
   );
 }

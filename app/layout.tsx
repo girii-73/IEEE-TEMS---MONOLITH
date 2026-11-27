@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Unbounded, Manrope } from "next/font/google";
+import { Instrument_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { MotionProvider } from "@/components/MotionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { EVENT, getDisplayVenue } from "@/data/event";
+import { cn } from "@/lib/utils";
 
-const unbounded = Unbounded({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const manrope = Manrope({
+/* Limegreen.studio pairing: Instrument Sans + Newsreader italic */
+const instrumentSans = Instrument_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  variable: "--font-accent",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -57,9 +60,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${unbounded.variable} ${manrope.variable} h-full antialiased`}
+      className={cn(
+        "h-full antialiased font-sans",
+        instrumentSans.variable,
+        newsreader.variable,
+      )}
     >
-      <body className="min-h-full bg-void text-mist font-sans selection:bg-violet selection:text-mist">
+      <body className="min-h-full bg-void font-sans text-mist">
         <ThemeProvider>
           <MotionProvider>{children}</MotionProvider>
         </ThemeProvider>

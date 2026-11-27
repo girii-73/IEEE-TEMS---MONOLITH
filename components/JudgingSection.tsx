@@ -10,26 +10,28 @@ export function JudgingSection() {
     <section
       id="judging"
       aria-labelledby="judging-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
+      <div className="section-rule mb-16 md:mb-20" />
+
+      <p className="section-label">Judging</p>
       <h2
         id="judging-heading"
-        className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-mist"
+        className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
       >
         How you&apos;ll be judged
       </h2>
 
-      <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-        {/* Day 1 animated weighted bars */}
+      <div className="mt-12 grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-16">
         <div>
-          <h3 className="text-base sm:text-lg font-semibold text-mist">
-            Day 1 — Management Summit
+          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-mute">
+            Day 1 — Weighted criteria
           </h3>
           <div className="mt-6 space-y-5">
             {JUDGING_DATA.day1.map((item) => (
               <div key={item.criterion}>
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="text-sm sm:text-base font-medium text-mist">
+                  <span className="text-sm font-medium text-mist">
                     {item.criterion}
                   </span>
                   <span className="text-sm font-semibold text-lilac tabular-nums">
@@ -42,7 +44,7 @@ export function JudgingSection() {
                   aria-valuemin={0}
                   aria-valuemax={100}
                   aria-valuenow={item.weight}
-                  className="mt-2 h-2 w-full overflow-hidden rounded-full bg-midnight/85 border border-lilac/15"
+                  className="mt-2 h-1 w-full overflow-hidden bg-raised"
                 >
                   <motion.div
                     initial={
@@ -55,13 +57,9 @@ export function JudgingSection() {
                     transition={
                       shouldReduceMotion
                         ? { duration: 0 }
-                        : { duration: 0.75, ease: [0.22, 1, 0.36, 1] }
+                        : { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
                     }
-                    className="h-full rounded-full"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, var(--accent-violet), var(--accent-lilac))",
-                    }}
+                    className="h-full bg-lilac"
                   />
                 </div>
               </div>
@@ -69,21 +67,19 @@ export function JudgingSection() {
           </div>
         </div>
 
-        {/* Day 2 plain criteria list (no weights) */}
         <div>
-          <h3 className="text-base sm:text-lg font-semibold text-mist">
-            Day 2 — Sprintathon
+          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-mute">
+            Day 2 — Evaluation lens
           </h3>
-          <ul className="mt-6 divide-y divide-lilac/15 border-y border-lilac/15">
-            {JUDGING_DATA.day2.map((criterion) => (
+          <ul className="mt-6 divide-y divide-white/8 border-y border-hairline">
+            {JUDGING_DATA.day2.map((criterion, i) => (
               <li
                 key={criterion}
-                className="flex items-center gap-3.5 py-3.5 text-sm sm:text-base font-medium text-dusk"
+                className="flex items-center gap-4 py-3.5 text-sm text-dusk"
               >
-                <span
-                  aria-hidden="true"
-                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-lilac"
-                />
+                <span className="font-display text-xs text-mute tabular-nums shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span>{criterion}</span>
               </li>
             ))}

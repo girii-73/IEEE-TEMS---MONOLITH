@@ -1,153 +1,179 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Check, Zap } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { EVENT, PASSES_DATA } from "@/data/event";
+import FadeContent from "@/components/FadeContent";
+import SpotlightCard from "@/components/SpotlightCard";
+import GlareHover from "@/components/GlareHover";
+import Magnet from "@/components/Magnet";
+import SplitText from "@/components/SplitText";
 
 export function PassesSection() {
-  const shouldReduceMotion = useReducedMotion();
-  const fullPassUrl = EVENT.REG_URLS.full.trim();
-
   return (
     <section
       id="passes"
       aria-labelledby="passes-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="mx-auto max-w-6xl px-5 py-24 sm:px-8 md:py-32"
     >
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center max-w-2xl mx-auto"
-      >
-        <div className="glass-surface-lite inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-lilac mb-3">
-          <Zap className="h-3.5 w-3.5" aria-hidden="true" />
-          Festival Passes
-        </div>
-        <h2
-          id="passes-heading"
-          className="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
-        >
-          Register for MONOLITH
-        </h2>
-        <p className="mt-3 text-sm sm:text-base text-dusk">
-          Choose your pass and complete registration via Google Form. Fees are per person.
-        </p>
-      </motion.div>
+      <div className="section-rule mb-16 md:mb-20" />
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 items-stretch">
+      <FadeContent blur duration={0.7} className="max-w-2xl">
+        <p className="section-label">Register 05</p>
+        <SplitText
+          text="Ready to join?"
+          tag="h2"
+          splitType="words"
+          effect="rise"
+          trigger="view"
+          delay={50}
+          duration={0.5}
+          className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
+        />
+        <p id="passes-heading" className="sr-only">
+          Ready to join?
+        </p>
+        <p className="mt-3 text-sm sm:text-base text-dusk">
+          Choose a pass and complete registration. Fees are per person. Refreshments
+          and lunch included.
+        </p>
+      </FadeContent>
+
+      <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
         {PASSES_DATA.map((pass, idx) => {
           const url = EVENT.REG_URLS[pass.urlKey].trim();
           const hasUrl = url.length > 0;
 
+          if (pass.featured) {
+            return (
+              <FadeContent
+                key={pass.id}
+                blur
+                duration={0.6}
+                delay={0.1 * idx}
+                className="h-full"
+              >
+                <GlareHover
+                  width="100%"
+                  height="100%"
+                  background="#f4f4f5"
+                  borderColor="transparent"
+                  borderRadius="0px"
+                  glareColor="#ffffff"
+                  glareOpacity={0.35}
+                  glareSize={280}
+                  transitionDuration={650}
+                  className="!block h-full w-full !place-items-stretch"
+                >
+                  <article className="flex h-full flex-col justify-between bg-mist p-6 sm:p-7 text-void">
+                    <div>
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="font-display text-lg font-semibold text-void">
+                          {pass.name}
+                        </h3>
+                        {pass.badge && (
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-void/60">
+                            Best value
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-6 font-display text-4xl font-bold tabular-nums tracking-tight text-void">
+                        {pass.price}
+                      </p>
+                      <p className="mt-2 text-sm font-medium text-void/70">
+                        {pass.subtitle}
+                      </p>
+                      <p className="mt-1 text-sm text-void/55">{pass.detail}</p>
+                    </div>
+                    <div className="mt-8">
+                      {hasUrl ? (
+                        <Magnet padding={28} magnetStrength={1.5}>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex w-full items-center justify-between gap-2 border border-void/20 bg-void px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-transparent hover:text-void"
+                          >
+                            <span>{pass.buttonLabel}</span>
+                            <ArrowUpRight
+                              className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                              aria-hidden="true"
+                            />
+                          </a>
+                        </Magnet>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled
+                          className="w-full cursor-not-allowed border border-void/15 px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-void/40"
+                        >
+                          Opens soon
+                        </button>
+                      )}
+                    </div>
+                  </article>
+                </GlareHover>
+              </FadeContent>
+            );
+          }
+
           return (
-            <motion.article
+            <FadeContent
               key={pass.id}
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.5,
-                delay: idx * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className={`glass-panel flex flex-col justify-between rounded-[14px] p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 ${
-                pass.featured
-                  ? "ring-2 ring-amethyst/70 shadow-[0_0_40px_rgba(139,92,246,0.28)] md:-my-2"
-                  : ""
-              }`}
+              blur
+              duration={0.6}
+              delay={0.1 * idx}
+              className="h-full"
             >
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 min-h-[28px]">
-                  <h3 className="font-display text-lg font-semibold text-mist">
-                    {pass.name}
-                  </h3>
-                  {pass.badge && (
-                    <span className="rounded-full border border-lilac/45 bg-purple/65 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-lilac tabular-nums">
-                      {pass.badge}
-                    </span>
-                  )}
-                </div>
-
-                <p className="mt-5 font-display text-4xl sm:text-5xl font-bold text-mist tabular-nums">
-                  {pass.price}
-                </p>
-
-                <p className="mt-3 text-sm font-semibold text-lilac">
-                  {pass.subtitle}
-                </p>
-                <p className="mt-1.5 text-sm text-dusk leading-relaxed">
-                  {pass.detail}
-                </p>
-
-                <ul className="mt-6 space-y-2.5 border-t border-lilac/15 pt-5 text-xs sm:text-sm text-dusk">
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-lilac shrink-0" aria-hidden="true" />
-                    <span>Refreshments &amp; Lunch Included</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-lilac shrink-0" aria-hidden="true" />
-                    <span>Official Participation Certificate</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-8">
-                {hasUrl ? (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-wider active:scale-[0.98] ${
-                      pass.featured ? "cta-primary" : "cta-secondary"
-                    }`}
-                  >
-                    <span>{pass.buttonLabel}</span>
-                    <ArrowRight
-                      className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-                      aria-hidden="true"
-                    />
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    disabled
-                    className="flex w-full cursor-not-allowed items-center justify-center rounded-full border border-lilac/15 bg-deep/50 px-5 py-3 text-sm font-semibold text-dusk/60"
-                  >
-                    Opens soon
-                  </button>
-                )}
-              </div>
-            </motion.article>
+              <SpotlightCard
+                className="h-full !rounded-none !p-0"
+                spotlightColor="rgba(184, 146, 255, 0.22)"
+                theme="dark"
+              >
+                <article className="flex h-full flex-col justify-between border border-hairline p-6 sm:p-7">
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-mist">
+                      {pass.name}
+                    </h3>
+                    <p className="mt-6 font-display text-4xl font-bold tabular-nums tracking-tight text-mist">
+                      {pass.price}
+                    </p>
+                    <p className="mt-2 text-sm font-medium text-lilac">
+                      {pass.subtitle}
+                    </p>
+                    <p className="mt-1 text-sm text-dusk">{pass.detail}</p>
+                  </div>
+                  <div className="mt-8">
+                    {hasUrl ? (
+                      <Magnet padding={28} magnetStrength={1.5}>
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex w-full items-center justify-between gap-2 border border-edge px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mist transition-colors hover:bg-mist hover:text-void"
+                        >
+                          <span>{pass.buttonLabel}</span>
+                          <ArrowUpRight
+                            className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            aria-hidden="true"
+                          />
+                        </a>
+                      </Magnet>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled
+                        className="w-full cursor-not-allowed border border-hairline px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-mute"
+                      >
+                        Opens soon
+                      </button>
+                    )}
+                  </div>
+                </article>
+              </SpotlightCard>
+            </FadeContent>
           );
         })}
       </div>
-
-      {/* Centered GForm Redirect CTA (No on-site form) */}
-      <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-12 flex flex-col items-center text-center"
-      >
-        <a
-          href={fullPassUrl || "#passes"}
-          target={fullPassUrl ? "_blank" : undefined}
-          rel={fullPassUrl ? "noopener noreferrer" : undefined}
-          className="cta-primary group inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-4 text-sm sm:text-base font-semibold uppercase tracking-wider active:scale-[0.98]"
-        >
-          <span>Register Now via Google Form</span>
-          <ArrowRight
-            className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-            aria-hidden="true"
-          />
-        </a>
-        <p className="mt-3 text-xs sm:text-sm text-dusk">
-          Secure your spot · Redirects to official Google Form
-        </p>
-      </motion.div>
     </section>
   );
 }

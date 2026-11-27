@@ -9,27 +9,30 @@ import { LegacyHoneycombSection } from "@/components/LegacyHoneycombSection";
 import { Navbar } from "@/components/Navbar";
 import { PassesSection } from "@/components/PassesSection";
 import { PrizesSection } from "@/components/PrizesSection";
+import { ReactiveShell } from "@/components/ReactiveShell";
 import { ScheduleSection } from "@/components/ScheduleSection";
 import { SpeakersSection } from "@/components/SpeakersSection";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <main id="main-content" className="flex-1">
-        <Hero />
-        <AboutSection />
-        <DaysSection />
-        <ScheduleSection />
-        <SpeakersSection />
-        <JudgingSection />
-        <PrizesSection />
-        <PassesSection />
-        <LegacyHoneycombSection />
-        <FaqSection />
-        <CoordinatorsSection />
-      </main>
-      <Footer />
-    </div>
+    <ReactiveShell>
+      <div className="flex min-h-screen flex-col bg-void">
+        <Navbar />
+        <main id="main-content" className="flex-1">
+          <Hero />
+          <AboutSection />
+          <DaysSection />
+          <ScheduleSection />
+          <SpeakersSection />
+          <JudgingSection />
+          <PrizesSection />
+          <PassesSection />
+          <LegacyHoneycombSection />
+          <FaqSection />
+          <CoordinatorsSection />
+        </main>
+        <Footer />
+      </div>
+    </ReactiveShell>
   );
 }
