@@ -68,7 +68,7 @@ export function Countdown() {
                 value={cell.value}
                 minDigits={2}
                 fontSize={compact ? 22 : 32}
-                fontWeight={600}
+                fontWeight="600"
                 textColor="inherit"
                 duration={compact ? 0.35 : 0.55}
                 bounce={compact ? 0 : 0.12}

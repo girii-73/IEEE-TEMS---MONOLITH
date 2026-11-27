@@ -119,11 +119,11 @@ const makeItem = (slot, position, shown) => ({
 function Counter({
   value = 0,
   locale = 'en-US',
-  format,
-  decimals,
+  format = undefined,
+  decimals = undefined,
   minDigits = 1,
-  prefix,
-  suffix,
+  prefix = undefined,
+  suffix = undefined,
   direction = 'auto',
   duration = 0.7,
   bounce = 0.2,
@@ -137,9 +137,9 @@ function Counter({
   gap = 0,
   padding = 0,
   tabular = true,
-  digitStyle,
+  digitStyle = undefined,
   className = '',
-  style
+  style = undefined
 }) {
   const rootRef = useRef(null);
   const rowRef = useRef(null);

@@ -74,6 +74,7 @@ export function Navbar() {
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
           <SquishSwitch
+            id="theme-toggle"
             checked={theme === "light"}
             onChange={(next: boolean) => {
               if ((next && theme !== "light") || (!next && theme !== "dark")) {
