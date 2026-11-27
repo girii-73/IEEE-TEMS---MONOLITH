@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, type CSSProperties } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, type CSSProperties } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Mail01Icon } from "@hugeicons/core-free-icons";
 
@@ -139,7 +139,10 @@ const ProfileCard = ({
     intro,
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const root = rootRef.current;
@@ -384,6 +387,7 @@ const ProfileCard = ({
             <span className="profile-card__holo-shift" />
           </span>
           {avatarUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               className="profile-card__photo"
               src={avatarUrl}
@@ -408,6 +412,7 @@ const ProfileCard = ({
           <div className="profile-card__footer">
             {miniAvatarUrl && (
               <span className="profile-card__avatar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={miniAvatarUrl} alt="" loading="lazy" draggable={false} />
               </span>
             )}

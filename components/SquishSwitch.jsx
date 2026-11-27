@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { animate, motion, useMotionValue, useReducedMotion, useSpring, useTransform, useVelocity } from 'motion/react';
 import './SquishSwitch.css';
 
@@ -49,7 +49,10 @@ export default function SquishSwitch({
   const trackRef = useRef(null);
   const grip = useRef(null);
   const onRef = useRef(on);
-  onRef.current = on;
+
+  useLayoutEffect(() => {
+    onRef.current = on;
+  });
   const skipClick = useRef(false);
   const autoId = useId();
   const buttonId = id ?? autoId;

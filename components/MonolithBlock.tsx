@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -169,7 +169,7 @@ function createBasaltMaterial() {
 
 function Pillar() {
   const group = useRef<THREE.Group>(null);
-  const material = useMemo(() => createBasaltMaterial(), []);
+  const pillarMesh = useRef<THREE.Mesh>(null);
   const { pointer, size } = useThree();
   const target = useRef({ x: 0, y: 0 });
   const reduceMotion = useRef(false);
@@ -181,19 +181,29 @@ function Pillar() {
   }, []);
 
   useEffect(() => {
-    return () => {
-      material.dispose();
+    const mesh = pillarMesh.current;
+    if (!mesh) return;
+    const mat = createBasaltMaterial();
+    mesh.material = mat;
+    mesh.onBeforeRender = () => {
+      const shader = mat.userData.shader as
+        | { uniforms: { uTime: { value: number } } }
+        | undefined;
+      if (shader) {
+        shader.uniforms.uTime.value =
+          (mesh.parent?.userData.elapsedTime as number | undefined) ?? 0;
+      }
     };
-  }, [material]);
+    return () => {
+      mesh.onBeforeRender = () => {};
+      mat.dispose();
+    };
+  }, []);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    const shader = material.userData.shader as
-      | { uniforms: { uTime: { value: number } } }
-      | undefined;
-    if (shader) shader.uniforms.uTime.value = t;
-
     if (!group.current) return;
+    group.current.userData.elapsedTime = t;
 
     if (reduceMotion.current) {
       group.current.rotation.y = 0.12;
@@ -223,7 +233,7 @@ function Pillar() {
 
   return (
     <group ref={group} position={[0, -0.2, 0]}>
-      <mesh castShadow position={[0, 1.05, 0]} material={material}>
+      <mesh ref={pillarMesh} castShadow position={[0, 1.05, 0]}>
         <cylinderGeometry args={[0.58, 0.66, 2.55, 6]} />
       </mesh>
 
@@ -367,11 +377,14 @@ function Scene() {
   );
 }
 
+const emptySubscribe = () => () => {};
+
 export function MonolithBlock({ className = "" }: { className?: string }) {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    setReady(true);
-  }, []);
+  const ready = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
   if (!ready) {
     return (

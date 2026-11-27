@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import './PixelTrail.css';
 
@@ -264,26 +264,28 @@ export default function PixelTrail({
   const engineRef = useRef(null);
   const settingsRef = useRef(null);
 
-  settingsRef.current = {
-    gridSize: Math.max(1, gridSize),
-    trailSize: Math.max(0, trailSize),
-    maxAge: Math.max(1, maxAge),
-    interpolate,
-    ease: easingFunction || identityEase,
-    goo: gooeyFilter ? Math.max(0, gooeyFilter.strength ?? 2) : 0,
-    color: parseColor(color, [1, 1, 1]),
-    trailColor: trailColor ? parseColor(trailColor, [1, 1, 1]) : null,
-    shape: SHAPES[shape] ?? 0,
-    gap: Math.min(Math.max(gap, 0), 0.9),
-    decay: DECAYS[decay] ?? 0,
-    flow: Math.min(Math.max(flow, 0), 1),
-    gravity: Math.min(Math.max(gravity, -1), 1),
-    sparkle: Math.min(Math.max(sparkle, 0), 1),
-    clickBurst,
-    shine: Math.min(Math.max(shine, 0), 1),
-    glow: Math.min(Math.max(glow, 0), 1),
-    dpr
-  };
+  useLayoutEffect(() => {
+    settingsRef.current = {
+      gridSize: Math.max(1, gridSize),
+      trailSize: Math.max(0, trailSize),
+      maxAge: Math.max(1, maxAge),
+      interpolate,
+      ease: easingFunction || identityEase,
+      goo: gooeyFilter ? Math.max(0, gooeyFilter.strength ?? 2) : 0,
+      color: parseColor(color, [1, 1, 1]),
+      trailColor: trailColor ? parseColor(trailColor, [1, 1, 1]) : null,
+      shape: SHAPES[shape] ?? 0,
+      gap: Math.min(Math.max(gap, 0), 0.9),
+      decay: DECAYS[decay] ?? 0,
+      flow: Math.min(Math.max(flow, 0), 1),
+      gravity: Math.min(Math.max(gravity, -1), 1),
+      sparkle: Math.min(Math.max(sparkle, 0), 1),
+      clickBurst,
+      shine: Math.min(Math.max(shine, 0), 1),
+      glow: Math.min(Math.max(glow, 0), 1),
+      dpr
+    };
+  });
 
   useEffect(() => {
     const container = containerRef.current;

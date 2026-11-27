@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type HTMLAttributes, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, type HTMLAttributes, type RefObject } from 'react';
 
 export interface LaserFlowProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
   surfaceRef?: RefObject<HTMLElement | null>;
@@ -536,7 +536,10 @@ export const LaserFlow = ({
     dpr
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const container = containerRef.current;

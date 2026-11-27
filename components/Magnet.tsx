@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, type HTMLAttributes, type ReactNode } from 'react';
 
 export type MagnetAxis = 'both' | 'x' | 'y';
 
@@ -157,7 +157,10 @@ const Magnet = ({
     onActiveChange
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const wrapper = wrapperRef.current;

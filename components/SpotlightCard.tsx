@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 
 export type SpotlightShape = 'circle' | 'beam';
 
@@ -120,7 +120,10 @@ const SpotlightCard = ({
     grain: clamp(grain, 0, 1)
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     wakeRef.current?.();

@@ -123,8 +123,12 @@ const SplitText = ({
     if (fontsLoaded) return undefined;
     let active = true;
     if (!document.fonts) {
-      setFontsLoaded(true);
-      return undefined;
+      Promise.resolve().then(() => {
+        if (active) setFontsLoaded(true);
+      });
+      return () => {
+        active = false;
+      };
     }
     document.fonts.ready.then(() => {
       if (active) setFontsLoaded(true);
