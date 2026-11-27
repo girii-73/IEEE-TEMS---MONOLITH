@@ -701,9 +701,36 @@ const stepSimulation = (sim, dt, physics, time) => {
   sim.calm = energy < 2e-4 ? sim.calm + dt : 0;
 };
 
+/**
+ * @typedef {Object} LanyardProps
+ * @property {string} [frontImage]
+ * @property {string} [backImage]
+ * @property {'cover' | 'contain'} [imageFit]
+ * @property {string} [cardColor]
+ * @property {'portrait' | 'landscape'} [orientation]
+ * @property {'glossy' | 'matte' | 'holographic' | 'metallic'} [finish]
+ * @property {number} [cornerRadius]
+ * @property {number} [size]
+ * @property {'left' | 'center' | 'right'} [anchor]
+ * @property {number} [strapLength]
+ * @property {string} [strapImage]
+ * @property {string} [strapColor]
+ * @property {number} [strapWidth]
+ * @property {string} [metal]
+ * @property {number} [gravity]
+ * @property {number} [damping]
+ * @property {number} [elasticity]
+ * @property {number} [breeze]
+ * @property {boolean} [interactive]
+ * @property {boolean} [intro]
+ * @property {string} [className]
+ * @property {import('react').CSSProperties} [style]
+ */
+
+/** @param {LanyardProps} props */
 const Lanyard = ({
-  frontImage,
-  backImage,
+  frontImage = undefined,
+  backImage = undefined,
   imageFit = 'cover',
   cardColor = '#ffffff',
   orientation = 'portrait',
@@ -712,7 +739,7 @@ const Lanyard = ({
   size = 0.6,
   anchor = 'center',
   strapLength = 0.5,
-  strapImage,
+  strapImage = undefined,
   strapColor = '#111111',
   strapWidth = 0.65,
   metal = 'silver',
@@ -723,7 +750,7 @@ const Lanyard = ({
   interactive = true,
   intro = true,
   className = '',
-  style
+  style = undefined
 }) => {
   const containerRef = useRef(null);
   const settingsRef = useRef(null);
