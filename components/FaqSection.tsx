@@ -19,7 +19,7 @@ export function FaqSection() {
 
       <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          <p className="section-label">FAQ 08</p>
+          <p className="section-label">FAQ 09</p>
           <h2
             id="faq-heading"
             className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
@@ -31,7 +31,7 @@ export function FaqSection() {
           </p>
         </div>
 
-        <div className="lg:col-span-8 divide-y divide-white/8 border-y border-hairline">
+        <div className="lg:col-span-8 divide-y divide-hairline border-y border-hairline">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openIndex === index;
             const buttonId = `faq-button-${index}`;

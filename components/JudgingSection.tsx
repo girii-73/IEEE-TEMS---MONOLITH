@@ -71,7 +71,7 @@ export function JudgingSection() {
           <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-mute">
             Day 2 — Evaluation lens
           </h3>
-          <ul className="mt-6 divide-y divide-white/8 border-y border-hairline">
+          <ul className="mt-6 divide-y divide-hairline border-y border-hairline">
             {JUDGING_DATA.day2.map((criterion, i) => (
               <li
                 key={criterion}

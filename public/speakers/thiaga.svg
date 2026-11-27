@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1a1028"/>
+      <stop offset="0.55" stop-color="#12081c"/>
+      <stop offset="1" stop-color="#5f279e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="320" y1="120" x2="320" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9867e1" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#9867e1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="900" rx="48" fill="url(#bg)"/>
+  <circle cx="320" cy="250" r="180" fill="url(#glow)"/>
+  <circle cx="320" cy="250" r="92" fill="#22152f" stroke="#9867e1" stroke-width="3"/>
+  <text x="320" y="268" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700" fill="#e8d9ff">TS</text>
+  <text x="320" y="520" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700" fill="#f8f8ff">Thiaga Sir</text>
+  <text x="320" y="575" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" fill="#c9b8e0">CaratLane · A TATA Product</text>
+  <rect x="180" y="640" width="280" height="2" fill="#9867e1" opacity="0.55"/>
+  <text x="320" y="700" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" letter-spacing="4" fill="#9867e1">FEATURED SPEAKER</text>
+  <text x="320" y="740" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" fill="#958e9d">MONOLITH · Day 1</text>
+</svg>

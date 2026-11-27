@@ -54,10 +54,10 @@ const ACCENT = {
     wash: "from-[#e8c547]/18 via-transparent to-transparent",
   },
   silver: {
-    border: "border-white/25",
-    glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_0_40px_-16px_rgba(248,248,255,0.35)]",
-    icon: "text-[#d4d4d8]",
-    wash: "from-white/10 via-transparent to-transparent",
+    border: "border-edge",
+    glow: "shadow-[0_0_0_1px_var(--border-subtle),0_0_40px_-16px_rgba(75,0,130,0.2)]",
+    icon: "text-dusk",
+    wash: "from-mist/10 via-transparent to-transparent",
   },
   bronze: {
     border: "border-[#c47a4a]/45",
@@ -72,10 +72,10 @@ const ACCENT = {
     wash: "from-lilac/18 via-transparent to-transparent",
   },
   mist: {
-    border: "border-white/20",
-    glow: "shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_0_36px_-16px_rgba(248,248,255,0.28)]",
+    border: "border-hairline",
+    glow: "shadow-[0_0_0_1px_var(--border-subtle),0_0_36px_-16px_rgba(75,0,130,0.16)]",
     icon: "text-mist",
-    wash: "from-white/8 via-transparent to-transparent",
+    wash: "from-mist/8 via-transparent to-transparent",
   },
   amber: {
     border: "border-[#5f279e]/50",

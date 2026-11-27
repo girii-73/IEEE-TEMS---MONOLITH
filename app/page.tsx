@@ -13,6 +13,7 @@ import { PullSection } from "@/components/PullSection";
 import { ReactiveShell } from "@/components/ReactiveShell";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SpeakersSection } from "@/components/SpeakersSection";
+import { SponsorsPartnersSection } from "@/components/SponsorsPartnersSection";
 
 export default function HomePage() {
   return (
@@ -68,14 +69,18 @@ export default function HomePage() {
           </PullSection>
 
           <PullSection zIndex={100} tone="deep">
-            <FaqSection />
+            <SponsorsPartnersSection />
           </PullSection>
 
           <PullSection zIndex={110} tone="void">
-            <CoordinatorsSection />
+            <FaqSection />
           </PullSection>
 
           <PullSection zIndex={120} tone="deep">
+            <CoordinatorsSection />
+          </PullSection>
+
+          <PullSection zIndex={130} tone="void">
             <Footer />
           </PullSection>
         </main>

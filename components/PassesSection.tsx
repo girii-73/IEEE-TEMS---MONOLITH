@@ -63,7 +63,7 @@ export function PassesSection() {
                     {pass.name}
                   </h3>
                   {pass.badge && (
-                    <span className="rounded-full border border-lilac/45 bg-purple/65 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-lilac tabular-nums">
+                    <span className="rounded-full border border-lilac/45 bg-raised px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-lilac tabular-nums">
                       {pass.badge}
                     </span>
                   )}

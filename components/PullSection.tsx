@@ -26,7 +26,7 @@ export function PullSection({
   return (
     <section
       id={id}
-      className={`pull-section relative shadow-[0_-1px_0_var(--border-subtle),0_-28px_64px_-12px_rgba(0,0,0,0.72)] ${surface} ${className}`.trim()}
+      className={`pull-section relative ${surface} ${className}`.trim()}
       style={{ zIndex }}
     >
       {children}

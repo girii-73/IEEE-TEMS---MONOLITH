@@ -10,6 +10,10 @@ function toHandle(name: string) {
     .slice(0, 16);
 }
 
+const COORDINATOR_AVATARS: Record<string, string> = {
+  "Thanishka Yogesh": "/speakers/thanishka.png",
+};
+
 export function CoordinatorsSection() {
   return (
     <section
@@ -19,7 +23,7 @@ export function CoordinatorsSection() {
     >
       <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
 
-      <p className="section-label">Team 09</p>
+      <p className="section-label">Team 10</p>
       <h2
         id="coordinators-heading"
         className="mt-4 font-display text-3xl font-semibold tracking-tight text-mist sm:text-4xl"
@@ -39,6 +43,8 @@ export function CoordinatorsSection() {
               handle={toHandle(name)}
               status="IEEE TEMS"
               statusColor="#9867e1"
+              avatarUrl={COORDINATOR_AVATARS[name]}
+              miniAvatarUrl={COORDINATOR_AVATARS[name]}
               contactText="Hello"
               showUserInfo
               theme="dark"

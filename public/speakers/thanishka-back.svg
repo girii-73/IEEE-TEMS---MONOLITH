@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="640" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12081c"/>
+      <stop offset="1" stop-color="#1e0f32"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="900" rx="48" fill="url(#bg)"/>
+  <rect x="56" y="72" width="528" height="4" rx="2" fill="#9867e1"/>
+  <text x="320" y="140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" letter-spacing="5" fill="#9867e1">SPEAKER PASS</text>
+  <text x="320" y="210" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="700" fill="#f8f8ff">Thanishka Yogesh</text>
+  <text x="320" y="265" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" fill="#c9b8e0">Student Coordinator</text>
+
+  <text x="80" y="360" font-family="Inter, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#9867e1">ROLE</text>
+  <text x="80" y="400" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="#f8f8ff">Student Coordinator</text>
+
+  <text x="80" y="470" font-family="Inter, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#9867e1">ORGANISATION</text>
+  <text x="80" y="510" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="#f8f8ff">IEEE TEMS</text>
+  <text x="80" y="545" font-family="Inter, Arial, sans-serif" font-size="18" fill="#958e9d">SEC SBC</text>
+
+  <text x="80" y="620" font-family="Inter, Arial, sans-serif" font-size="14" letter-spacing="3" fill="#9867e1">ABOUT</text>
+  <text x="80" y="665" font-family="Inter, Arial, sans-serif" font-size="18" fill="#ccc3d3">Part of the MONOLITH organising</text>
+  <text x="80" y="695" font-family="Inter, Arial, sans-serif" font-size="18" fill="#ccc3d3">team  helping students lead,</text>
+  <text x="80" y="725" font-family="Inter, Arial, sans-serif" font-size="18" fill="#ccc3d3">build, and connect across the</text>
+  <text x="80" y="755" font-family="Inter, Arial, sans-serif" font-size="18" fill="#ccc3d3">two-day IEEE TEMS festival.</text>
+</svg>

@@ -4,6 +4,65 @@
   gap: 10px;
 }
 
+.squish-switch-root--theme {
+  gap: 6px;
+}
+
+.squish-switch__glyph {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.38;
+  transition:
+    opacity var(--ss-fade, 280ms) ease,
+    color var(--ss-fade, 280ms) ease,
+    transform var(--ss-fade, 280ms) ease;
+  pointer-events: none;
+}
+
+.squish-switch__glyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.squish-switch__glyph--moon {
+  color: #6b5a8a;
+}
+
+.squish-switch__glyph--sun {
+  color: #b45309;
+}
+
+.squish-switch-root:not([data-on]) .squish-switch__glyph--moon {
+  opacity: 1;
+  color: #2a1848;
+  transform: scale(1.08);
+}
+
+.squish-switch-root[data-on] .squish-switch__glyph--sun {
+  opacity: 1;
+  color: #c2410c;
+  transform: scale(1.08);
+}
+
+[data-theme='light'] .squish-switch__glyph--moon {
+  color: #7c6b9a;
+}
+
+[data-theme='light'] .squish-switch-root:not([data-on]) .squish-switch__glyph--moon {
+  color: #1e0b36;
+}
+
+[data-theme='light'] .squish-switch__glyph--sun {
+  color: #a16207;
+}
+
+[data-theme='light'] .squish-switch-root[data-on] .squish-switch__glyph--sun {
+  color: #9a3412;
+}
+
 .squish-switch {
   --ss-w: 76px;
   --ss-h: 38px;
@@ -65,6 +124,7 @@
   position: absolute;
   top: var(--ss-inset);
   left: 0;
+  z-index: 1;
   width: var(--ss-thumb);
   height: var(--ss-thumb);
   border-radius: var(--ss-thumb-r);
