@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useRef, type CSSProperties } from 'react';
 
 const VERTEX = `#version 300 es
 precision highp float;
@@ -204,7 +204,10 @@ const DotGrid = ({
     dpr
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;

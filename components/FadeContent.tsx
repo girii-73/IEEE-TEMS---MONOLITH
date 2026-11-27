@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
+import { useLayoutEffect, useRef, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -212,7 +212,10 @@ const FadeContent = ({
 }: FadeContentProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const callbacksRef = useRef({ onStart, onComplete, onDisappearanceComplete });
-  callbacksRef.current = { onStart, onComplete, onDisappearanceComplete };
+
+  useLayoutEffect(() => {
+    callbacksRef.current = { onStart, onComplete, onDisappearanceComplete };
+  });
 
   useLayoutEffect(() => {
     const el = ref.current;

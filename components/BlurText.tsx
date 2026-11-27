@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, MotionConfig, type Easing, type MotionStyle, type Transition } from 'motion/react';
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
 type Snapshot = Record<string, string | number>;
 type Keyframes = Record<string, Array<string | number>>;
@@ -237,11 +237,14 @@ const BlurText = ({
 }: BlurTextProps) => {
   const ref = useRef<HTMLParagraphElement>(null);
   const [phase, setPhase] = useState<Phase>(() => startPhase(trigger));
-  const firstPhase = useRef(phase).current;
+  const [firstPhase] = useState(phase);
   const [focusWord, setFocusWord] = useState(-1);
   const settledRef = useRef(phase === 'rest');
   const completeRef = useRef(onAnimationComplete);
-  completeRef.current = onAnimationComplete;
+
+  useLayoutEffect(() => {
+    completeRef.current = onAnimationComplete;
+  });
 
   const fx = useMemo(() => buildEffect(effect, direction, blur, distance), [effect, direction, blur, distance]);
 
@@ -293,13 +296,22 @@ const BlurText = ({
 
   useEffect(() => {
     if (phase !== 'from') return undefined;
+    let active = true;
     if (trigger === 'load') {
-      setPhase('in');
-      return undefined;
+      Promise.resolve().then(() => {
+        if (active) setPhase('in');
+      });
+      return () => {
+        active = false;
+      };
     }
     if (trigger === 'hover' || trigger === 'click') {
-      setPhase('rest');
-      return undefined;
+      Promise.resolve().then(() => {
+        if (active) setPhase('rest');
+      });
+      return () => {
+        active = false;
+      };
     }
     const element = ref.current;
     if (!element) return undefined;

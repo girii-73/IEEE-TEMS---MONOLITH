@@ -10,7 +10,6 @@ import { Navbar } from "@/components/Navbar";
 import { PassesSection } from "@/components/PassesSection";
 import { PrizesSection } from "@/components/PrizesSection";
 import { ReactiveShell } from "@/components/ReactiveShell";
-import { ScheduleSection } from "@/components/ScheduleSection";
 import { SpeakersSection } from "@/components/SpeakersSection";
 
 export default function HomePage() {
@@ -22,7 +21,6 @@ export default function HomePage() {
           <Hero />
           <AboutSection />
           <DaysSection />
-          <ScheduleSection />
           <SpeakersSection />
           <JudgingSection />
           <PrizesSection />

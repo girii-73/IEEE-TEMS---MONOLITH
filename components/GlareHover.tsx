@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 
 type Variant = 'streak' | 'twin' | 'sheen';
 type Mode = 'hover' | 'follow' | 'loop' | 'click';
@@ -107,7 +107,10 @@ const GlareHover = ({
   const introRef = useRef(false);
   const settings = { glareAngle, glareSize, transitionDuration, interval, playOnce, intro };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const root = rootRef.current;

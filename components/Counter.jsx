@@ -176,7 +176,10 @@ function Counter({
     tabular
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   const paint = item => {
     const el = item.el;
@@ -288,7 +291,10 @@ function Counter({
   };
 
   const kickRef = useRef(kick);
-  kickRef.current = kick;
+
+  useLayoutEffect(() => {
+    kickRef.current = kick;
+  });
 
   useLayoutEffect(() => {
     const e = engine.current;
@@ -362,8 +368,8 @@ function Counter({
         );
       return same ? previous : merged;
     });
-    kick();
-  }, [slots]);
+    kickRef.current();
+  }, [slots, amount]);
 
   useLayoutEffect(() => {
     const row = rowRef.current;

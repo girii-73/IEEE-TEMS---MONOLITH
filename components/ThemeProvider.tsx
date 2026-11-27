@@ -5,7 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 export type ThemeMode = "dark" | "light";
@@ -20,27 +20,42 @@ const ThemeContext = createContext<ThemeContextValue>({
   toggleTheme: () => {},
 });
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<ThemeMode>("dark");
+const listeners = new Set<() => void>();
 
-  useEffect(() => {
-    const saved = window.localStorage.getItem("monolith-theme");
-    const next: ThemeMode = saved === "light" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-  }, []);
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === "monolith-theme") callback();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(callback);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function getSnapshot(): ThemeMode {
+  const saved = window.localStorage.getItem("monolith-theme");
+  return saved === "light" ? "light" : "dark";
+}
+
+function getServerSnapshot(): ThemeMode {
+  return "dark";
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next: ThemeMode = prev === "dark" ? "light" : "dark";
-      window.localStorage.setItem("monolith-theme", next);
-      document.documentElement.setAttribute("data-theme", next);
-      return next;
-    });
+    const current = getSnapshot();
+    const next: ThemeMode = current === "dark" ? "light" : "dark";
+    window.localStorage.setItem("monolith-theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+    listeners.forEach((listener) => listener());
   }, []);
 
   return (
