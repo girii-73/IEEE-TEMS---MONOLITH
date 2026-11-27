@@ -1,72 +1,15 @@
 'use client';
 
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef } from 'react';
+
+import './PixelTrail.css';
 
 const TRAIL_SIZE = 512;
 const AGE_SIZE = 256;
-export interface PixelTrailProps {
-  gridSize?: number;
-  trailSize?: number;
-  maxAge?: number;
-  interpolate?: number;
-  easingFunction?: (x: number) => number;
-  gooeyFilter?: { id?: string; strength?: number } | false | null;
-  color?: string;
-  trailColor?: string;
-  shape?: 'square' | 'circle' | 'diamond';
-  gap?: number;
-  decay?: 'fade' | 'shrink' | 'dither';
-  flow?: number;
-  gravity?: number;
-  sparkle?: number;
-  clickBurst?: boolean;
-  shine?: number;
-  glow?: number;
-  imageSrc?: string;
-  dpr?: number;
-  className?: string;
-  style?: CSSProperties;
-}
+const SHAPES = { square: 0, circle: 1, diamond: 2 };
+const DECAYS = { fade: 0, shrink: 1, dither: 2 };
 
-interface Settings {
-  gridSize: number;
-  trailSize: number;
-  maxAge: number;
-  interpolate: number;
-  ease: (x: number) => number;
-  goo: number;
-  color: number[];
-  trailColor: number[] | null;
-  shape: number;
-  gap: number;
-  decay: number;
-  flow: number;
-  gravity: number;
-  sparkle: number;
-  clickBurst: boolean;
-  shine: number;
-  glow: number;
-  dpr?: number;
-}
-
-interface TrailPoint {
-  x: number;
-  y: number;
-  age: number;
-  force: number;
-  vx: number;
-  vy: number;
-}
-
-interface Engine {
-  setImage: (image: HTMLImageElement | null) => void;
-  redraw: () => void;
-}
-
-const SHAPES: Record<string, number> = { square: 0, circle: 1, diamond: 2 };
-const DECAYS: Record<string, number> = { fade: 0, shrink: 1, dither: 2 };
-
-const identityEase = (x: number) => x;
+const identityEase = x => x;
 
 const VERTEX = `#version 300 es
 in vec2 a_position;
@@ -264,8 +207,8 @@ void main() {
 `;
 
 const parseColor = (() => {
-  let context: CanvasRenderingContext2D | null = null;
-  return (value: string, fallback: number[]): number[] => {
+  let context = null;
+  return (value, fallback) => {
     if (typeof document === 'undefined') return fallback;
     if (!context) {
       const canvas = document.createElement('canvas');
@@ -283,7 +226,7 @@ const parseColor = (() => {
   };
 })();
 
-const compile = (gl: WebGL2RenderingContext, type: number, source: string) => {
+const compile = (gl, type, source) => {
   const shader = gl.createShader(type);
   if (!shader) return null;
   gl.shaderSource(shader, source);
@@ -311,15 +254,15 @@ export default function PixelTrail({
   clickBurst = false,
   shine = 0.6,
   glow = 0.4,
-  imageSrc,
-  dpr,
+  imageSrc = undefined,
+  dpr = undefined,
   className = '',
-  style
-}: PixelTrailProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const engineRef = useRef<Engine | null>(null);
-  const settingsRef = useRef<Settings>(null as unknown as Settings);
+  style = undefined
+}) {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+  const engineRef = useRef(null);
+  const settingsRef = useRef(null);
 
   settingsRef.current = {
     gridSize: Math.max(1, gridSize),
@@ -365,7 +308,7 @@ export default function PixelTrail({
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return undefined;
     gl.useProgram(program);
 
-    const uniforms: Record<string, WebGLUniformLocation | null> = {};
+    const uniforms = {};
     const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
     for (let i = 0; i < uniformCount; i++) {
       const info = gl.getActiveUniform(program, i);
@@ -380,7 +323,7 @@ export default function PixelTrail({
     gl.enableVertexAttribArray(0);
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-    const makeTexture = (unit: number) => {
+    const makeTexture = unit => {
       const texture = gl.createTexture();
       gl.activeTexture(gl.TEXTURE0 + unit);
       gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -425,9 +368,9 @@ export default function PixelTrail({
       width: 1,
       height: 1,
       ratio: 1,
-      points: [] as TrailPoint[],
+      points: [],
       force: 0,
-      image: null as HTMLImageElement | null,
+      image: null,
       imageReady: false,
       imageCells: 0,
       imageWidth: 0,
@@ -435,7 +378,7 @@ export default function PixelTrail({
       pointer: { x: 0, y: 0, at: 0, vx: 0, vy: 0, inside: false }
     };
 
-    const addTouch = (x: number, y: number, vx: number, vy: number) => {
+    const addTouch = (x, y, vx, vy) => {
       const s = settingsRef.current;
       const { points } = state;
       const last = points[points.length - 1];
@@ -457,7 +400,7 @@ export default function PixelTrail({
       points.push({ x, y, age: 0, force: state.force, vx, vy });
     };
 
-    const drawTouch = (point: TrailPoint) => {
+    const drawTouch = point => {
       const s = settingsRef.current;
       const x = point.x * TRAIL_SIZE;
       const y = (1 - point.y) * TRAIL_SIZE;
@@ -491,7 +434,7 @@ export default function PixelTrail({
       ageCtx.fill();
     };
 
-    const updateTrail = (delta: number) => {
+    const updateTrail = delta => {
       const s = settingsRef.current;
       ctx.globalCompositeOperation = 'source-over';
       ctx.fillStyle = 'black';
@@ -518,7 +461,7 @@ export default function PixelTrail({
       state.points.forEach(drawTouch);
     };
 
-    const burst = (x: number, y: number) => {
+    const burst = (x, y) => {
       const count = 14;
       for (let k = 0; k < count; k++) {
         const angle = (k / count) * Math.PI * 2 + Math.random() * 0.3;
@@ -630,7 +573,7 @@ export default function PixelTrail({
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
 
-    const frame = (now: number) => {
+    const frame = now => {
       state.raf = 0;
       if (!state.alive) return;
       const delta = state.last ? (now - state.last) / 1000 : 1 / 60;
@@ -647,7 +590,7 @@ export default function PixelTrail({
       if (!state.raf && state.alive && state.visible) state.raf = requestAnimationFrame(frame);
     };
 
-    const toUv = (event: PointerEvent) => {
+    const toUv = event => {
       const rect = container.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -659,7 +602,7 @@ export default function PixelTrail({
       };
     };
 
-    const onMove = (event: PointerEvent) => {
+    const onMove = event => {
       const { x, y, inside } = toUv(event);
       const pointer = state.pointer;
       const now = performance.now();
@@ -682,7 +625,7 @@ export default function PixelTrail({
       pointer.inside = inside;
     };
 
-    const onDown = (event: PointerEvent) => {
+    const onDown = event => {
       const { x, y, inside } = toUv(event);
       if (!inside || !settingsRef.current.clickBurst) return;
       burst(x, y);
@@ -705,7 +648,7 @@ export default function PixelTrail({
     });
     visibility.observe(container);
 
-    const onLost = (event: Event) => {
+    const onLost = event => {
       event.preventDefault();
       state.alive = false;
       cancelAnimationFrame(state.raf);
@@ -718,7 +661,7 @@ export default function PixelTrail({
     window.addEventListener('blur', onLeave);
 
     engineRef.current = {
-      setImage: (image: HTMLImageElement | null) => {
+      setImage: image => {
         state.image = image;
         uploadImage();
         draw();
@@ -780,7 +723,7 @@ export default function PixelTrail({
   return (
     <div
       ref={containerRef}
-      className={`absolute z-1 ${className}`.trim()}
+      className={`pixel-canvas ${className}`.trim()}
       style={{
         position: 'relative',
         width: '100%',

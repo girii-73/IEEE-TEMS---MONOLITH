@@ -7,6 +7,7 @@ import { Countdown } from "@/components/Countdown";
 import Magnet from "@/components/Magnet";
 import DotGrid from "@/components/DotGrid";
 import LaserFlow from "@/components/LaserFlow";
+import PixelTrail from "@/components/PixelTrail.jsx";
 
 export function Hero() {
   const venue = getDisplayVenue();
@@ -18,8 +19,9 @@ export function Hero() {
       aria-label="MONOLITH festival overview"
       className="relative w-full"
     >
+      {/* Sticky stage: DotGrid + laser + pixel trail reverse cleanly on scroll-up */}
       <div
-        className="sticky top-0 z-0 h-[100svh] w-full overflow-x-clip"
+        className="sticky top-0 z-0 h-[100svh] w-full overflow-hidden"
         style={{ position: "sticky" }}
         aria-hidden="true"
       >
@@ -38,86 +40,80 @@ export function Hero() {
           />
         </div>
         <div className="hero-atmosphere pointer-events-none absolute inset-0" />
+
+        <div className="pointer-events-none absolute inset-0 z-[1]">
+          <PixelTrail
+            gridSize={42}
+            trailSize={0.09}
+            maxAge={420}
+            interpolate={5}
+            color="#b892ff"
+            trailColor="#6b13af"
+            gooeyFilter={{ strength: 2 }}
+            glow={0.45}
+            shine={0.55}
+            sparkle={0.15}
+          />
+        </div>
+
+        <div className="laser-drip-layer pointer-events-none absolute inset-0 z-[2]">
+          <LaserFlow
+            surfaceRef={laserSurfaceRef}
+            color="#d4bbff"
+            theme="dark"
+            intensity={1.65}
+            beamWidth={1.55}
+            flare={1.15}
+            spread={0.95}
+            spill={1.0}
+            fog={0.1}
+            dust={1.15}
+            streaks={1.45}
+            dots={0.75}
+            pulse={1.15}
+            speed={1.1}
+            beamPosition={0.5}
+            surfaceLevel={0.62}
+            mouseInteraction
+          />
+        </div>
       </div>
 
-      <div className="relative z-10 -mt-[100svh] flex min-h-[140svh] flex-col">
-        <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-5 pb-20 pt-28 text-center sm:px-8 sm:pt-32">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute right-5 top-1/2 z-20 hidden -translate-y-1/2 flex-col items-center gap-5 xl:flex"
-          >
-            <div className="h-16 w-px bg-gradient-to-b from-transparent via-[#b892ff]/50 to-transparent" />
-            <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-mute [writing-mode:vertical-rl]">
-              Instagram · LinkedIn
-            </span>
-            <div className="h-16 w-px bg-gradient-to-b from-transparent via-[#b892ff]/50 to-transparent" />
+      <div className="relative z-10 -mt-[100svh] flex min-h-[130svh] flex-col sm:min-h-[140svh]">
+        <div className="relative z-[1] mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-4 pb-16 pt-24 text-center sm:px-8 sm:pb-20 sm:pt-32">
+          <div className="relative mb-2 inline-flex max-w-full flex-col items-stretch">
+            <div
+              ref={laserSurfaceRef}
+              aria-hidden="true"
+              className="laser-strike-line h-px w-full shrink-0"
+            />
+            <h1 className="title-laser-text -mt-px select-none text-center font-sans text-[2.75rem] font-black uppercase leading-none tracking-tighter sm:text-7xl md:text-8xl lg:text-9xl">
+              MONOLITH
+            </h1>
           </div>
 
-          <p className="section-label mb-6">
-            IEEE TEMS SEC SBC · Sri Sai Ram Engineering College
-          </p>
-
-          {/* Thin strike line on the letter tops — full text bounds make LaserFlow paint a fake box */}
-          <div
-            className="relative mb-2 w-full max-w-4xl"
-            style={{ height: "min(72vw, 480px)" }}
-          >
-            <div className="absolute bottom-0 left-1/2 z-[1] inline-flex -translate-x-1/2 flex-col items-stretch">
-              <div
-                ref={laserSurfaceRef}
-                aria-hidden="true"
-                className="laser-strike-line h-px w-full shrink-0"
-              />
-              <h1 className="title-laser-text -mt-px select-none text-center font-sans text-5xl font-black uppercase leading-none tracking-tighter sm:text-7xl md:text-8xl lg:text-9xl">
-                MONOLITH
-              </h1>
-            </div>
-
-            <div className="laser-drip-layer pointer-events-none absolute inset-0 z-[2]">
-              <LaserFlow
-                surfaceRef={laserSurfaceRef}
-                color="#f0e8ff"
-                theme="dark"
-                intensity={4.4}
-                beamWidth={2.0}
-                flare={3.0}
-                spread={1.3}
-                spill={1.85}
-                fog={0.2}
-                dust={2.2}
-                streaks={2.6}
-                dots={1.45}
-                pulse={1.65}
-                speed={1.15}
-                beamPosition={0.5}
-                surfaceLevel={0.88}
-                mouseInteraction
-              />
-            </div>
-          </div>
-
-          <div className="mt-5 flex flex-col items-center gap-2">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-mist sm:text-base">
+          <div className="mt-4 flex flex-col items-center gap-2 sm:mt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mist sm:text-sm sm:text-base">
               {EVENT.EVENT_DATES.shortRange}
             </p>
-            <p className="max-w-xl text-sm leading-relaxed text-dusk sm:text-base">
+            <p className="max-w-xl px-1 text-sm leading-relaxed text-dusk sm:text-base">
               A two-day festival for builders who stay{" "}
               <em className="font-accent text-lilac">obsessed</em>
               {" · "}
               {venue}
             </p>
-            <p className="mt-1 text-xs uppercase tracking-[0.16em] text-mute sm:text-sm">
+            <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-mute sm:text-xs sm:text-sm">
               Management Summit · Sprintathon
             </p>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <Suspense fallback={null}>
               <Countdown />
             </Suspense>
           </div>
 
-          <div className="mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+          <div className="mt-8 flex w-full max-w-sm flex-col items-center justify-center gap-3 sm:mt-10 sm:max-w-none sm:w-auto sm:flex-row">
             <Magnet padding={40} magnetStrength={2} className="w-full sm:w-auto">
               <a
                 href="#passes"
@@ -139,7 +135,7 @@ export function Hero() {
           <a
             href="#hero-end"
             aria-label="Scroll to end of hero"
-            className="mt-14 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac"
+            className="mt-10 flex flex-col items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-mute transition-colors hover:text-lilac sm:mt-14"
           >
             <span>Scroll</span>
             <ArrowDown
