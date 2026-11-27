@@ -17,7 +17,7 @@ interface LegacyEvent {
 const LEGACY_EVENTS: LegacyEvent[] = [
   {
     id: "ascendra",
-    title: "ASCENDRA 4.0",
+    title: "ASCENDRA 5.0",
     year: "2026",
     tag: "Team Legacy",
     stat: "IEEE TEMS SEC",
@@ -26,7 +26,7 @@ const LEGACY_EVENTS: LegacyEvent[] = [
   },
   {
     id: "ascendra-2025",
-    title: "ASCENDRA 2025",
+    title: "ASCENDRA 4.0",
     year: "2025",
     tag: "4th Anniversary",
     stat: "5 Nov 2025",
