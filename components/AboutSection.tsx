@@ -15,13 +15,15 @@ const STATS = [
 export function AboutSection({ className = "" }: { className?: string }) {
   return (
     <section
+      id="about"
       aria-labelledby="about-heading"
-      className={`relative mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-12 md:pb-32 md:pt-14 ${className}`.trim()}
+      className={`section-y relative mx-auto w-full max-w-6xl px-4 sm:px-8 ${className}`.trim()}
     >
-      <div className="grid grid-cols-1 gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-16">
+      <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12">
         <FadeContent
           blur
-          duration={0.8}
+          duration={0.7}
+          threshold={0.05}
           ease="power2.out"
           className="lg:col-span-7"
         >
@@ -32,6 +34,8 @@ export function AboutSection({ className = "" }: { className?: string }) {
             splitType="words"
             effect="rise"
             trigger="view"
+            threshold={0.05}
+            rootMargin="-20px"
             delay={60}
             duration={0.55}
             className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-mist leading-[1.1]"
@@ -53,12 +57,13 @@ export function AboutSection({ className = "" }: { className?: string }) {
 
         <FadeContent
           blur
-          duration={0.8}
-          delay={0.15}
+          duration={0.7}
+          delay={0.1}
+          threshold={0.05}
           ease="power2.out"
           className="lg:col-span-5"
         >
-          <p className="section-label mb-6">By the Numbers</p>
+          <p className="section-label mb-4">By the Numbers</p>
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-hairline bg-hairline">
             {STATS.map((stat) => (
               <div
@@ -83,7 +88,7 @@ export function AboutSection({ className = "" }: { className?: string }) {
             ))}
           </dl>
 
-          <ul className="mt-8 space-y-3 border-t border-hairline pt-6">
+          <ul className="mt-6 space-y-2.5 border-t border-hairline pt-5">
             {ABOUT_COPY.goals.slice(0, 4).map((goal, i) => (
               <li
                 key={goal}

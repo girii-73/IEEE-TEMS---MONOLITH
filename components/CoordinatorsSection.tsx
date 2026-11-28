@@ -1,28 +1,12 @@
-"use client";
-
 import { EVENT } from "@/data/event";
-import ProfileCard from "@/components/ProfileCard";
-
-function toHandle(name: string) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "")
-    .slice(0, 16);
-}
-
-const COORDINATOR_AVATARS: Record<string, string> = {
-  "Thanishka Yogesh": "/speakers/thanishka.png",
-};
 
 export function CoordinatorsSection() {
   return (
     <section
       id="coordinators"
       aria-labelledby="coordinators-heading"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
       <p className="section-label">Team 10</p>
       <h2
         id="coordinators-heading"
@@ -34,35 +18,30 @@ export function CoordinatorsSection() {
         Student coordinators · IEEE TEMS SEC SBC
       </p>
 
-      <ul className="mt-8 grid grid-cols-2 justify-items-center gap-3 sm:mt-12 sm:gap-8 lg:grid-cols-3">
-        {EVENT.COORDINATORS.map((name) => (
-          <li key={name} className="w-full max-w-[280px]">
-            <ProfileCard
-              name={name}
-              title="Student Coordinator"
-              handle={toHandle(name)}
-              status="IEEE TEMS"
-              statusColor="#9867e1"
-              avatarUrl={COORDINATOR_AVATARS[name]}
-              miniAvatarUrl={COORDINATOR_AVATARS[name]}
-              contactText="Hello"
-              showUserInfo
-              theme="dark"
-              backdropColor="#1a1228"
-              holo={0.75}
-              glare={0.45}
-              tiltStrength={10}
-              parallax={6}
-              radius={14}
-              enableTilt
-              enableMobileTilt={false}
-              intro
-              onContactClick={() => {
-                window.location.href = `mailto:${EVENT.CONTACT.email}`;
-              }}
-            />
-          </li>
-        ))}
+      <ul className="heading-gap grid grid-cols-1 gap-x-10 border-t border-hairline sm:grid-cols-2 lg:grid-cols-3">
+        {EVENT.COORDINATORS.map(({ name, phone }) => {
+          const isPlaceholder = /x/i.test(phone);
+          return (
+            <li
+              key={name}
+              className="border-b border-hairline py-5 sm:py-6"
+            >
+              <p className="font-display text-base font-medium text-mist sm:text-lg">
+                {name}
+              </p>
+              {isPlaceholder ? (
+                <p className="mt-1 text-sm text-dusk tabular-nums">{phone}</p>
+              ) : (
+                <a
+                  href={`tel:${phone.replace(/\s+/g, "")}`}
+                  className="mt-1 inline-block text-sm text-dusk tabular-nums transition-colors hover:text-mist"
+                >
+                  {phone}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

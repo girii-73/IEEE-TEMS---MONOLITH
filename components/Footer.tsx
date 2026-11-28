@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-hairline">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-8 sm:py-16 pb-[max(3rem,env(safe-area-inset-bottom))]">
+      <div className="mx-auto max-w-6xl px-4 py-[var(--section-y)] sm:px-8 pb-[max(var(--section-y),env(safe-area-inset-bottom))]">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
             <span className="font-display text-sm font-semibold tracking-[0.18em] text-mist">
@@ -89,7 +89,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 sm:mt-10 flex flex-col gap-2 border-t border-hairline pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-mute">
             © 2026 MONOLITH · Organised by {EVENT.ORGANISER}
           </p>

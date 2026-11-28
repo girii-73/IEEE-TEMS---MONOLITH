@@ -92,7 +92,7 @@ export function PrizesSection() {
     <section
       id="prizes"
       aria-labelledby="prizes-heading"
-      className="relative overflow-x-clip"
+      className="section-y relative overflow-x-clip"
     >
       <div
         aria-hidden="true"
@@ -103,14 +103,12 @@ export function PrizesSection() {
         <div className="absolute right-[8%] top-1/3 h-40 w-40 rounded-full bg-[#5f279e]/14 blur-[70px]" />
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32">
-        <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5 }}
           className="mx-auto max-w-2xl text-center"
         >
           <p className="section-label">Prizes 04</p>
@@ -131,12 +129,12 @@ export function PrizesSection() {
           </p>
         </motion.div>
 
-        <div className="mt-12 sm:mt-16">
+        <div className="heading-gap">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-mute">
             Day 2 — Sprintathon
           </p>
 
-          <ul className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-5">
+          <ul className="mt-5 grid grid-cols-1 gap-4 sm:mt-6 sm:grid-cols-3 sm:gap-5">
             {DAY2_PODIUM.map((prize, index) => {
               const style = ACCENT[prize.accent];
               const Icon = prize.Icon;
@@ -144,15 +142,15 @@ export function PrizesSection() {
                 <motion.li
                   key={prize.label}
                   initial={
-                    shouldReduceMotion ? false : { opacity: 0, y: 20 }
+                    shouldReduceMotion ? false : { opacity: 0, y: 16 }
                   }
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{
-                    duration: 0.5,
-                    delay: shouldReduceMotion ? 0 : index * 0.08,
+                    duration: 0.45,
+                    delay: shouldReduceMotion ? 0 : index * 0.06,
                   }}
-                  className={`relative overflow-hidden rounded-2xl border bg-raised/60 px-5 py-8 text-center backdrop-blur-sm sm:px-6 sm:py-10 ${style.border} ${style.glow}`}
+                  className={`relative overflow-hidden rounded-2xl border bg-raised/60 px-5 py-7 text-center backdrop-blur-sm sm:px-6 sm:py-8 ${style.border} ${style.glow}`}
                 >
                   <div
                     aria-hidden="true"
@@ -178,12 +176,12 @@ export function PrizesSection() {
           </ul>
         </div>
 
-        <div className="mt-14 sm:mt-20">
+        <div className="mt-8 sm:mt-10">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-mute">
             Day 1 — Management Summit
           </p>
 
-          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+          <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
             {DAY1_AWARDS.map((prize, index) => {
               const style = ACCENT[prize.accent];
               return (
@@ -193,12 +191,12 @@ export function PrizesSection() {
                     shouldReduceMotion ? false : { opacity: 0, y: 16 }
                   }
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{
                     duration: 0.45,
-                    delay: shouldReduceMotion ? 0 : 0.05 + index * 0.06,
+                    delay: shouldReduceMotion ? 0 : 0.04 + index * 0.05,
                   }}
-                  className={`relative overflow-hidden rounded-2xl border bg-raised/50 px-5 py-7 text-center backdrop-blur-sm ${style.border} ${style.glow}`}
+                  className={`relative overflow-hidden rounded-2xl border bg-raised/50 px-5 py-6 text-center backdrop-blur-sm ${style.border} ${style.glow}`}
                 >
                   <div
                     aria-hidden="true"

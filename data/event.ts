@@ -35,6 +35,11 @@ export interface FaqItem {
   answer: string;
 }
 
+export interface CoordinatorContact {
+  name: string;
+  phone: string;
+}
+
 export interface EventConfig {
   EVENT_DATES: {
     day1: string;
@@ -57,7 +62,7 @@ export interface EventConfig {
     email: string;
   };
   ORGANISER: string;
-  COORDINATORS: readonly string[];
+  COORDINATORS: readonly CoordinatorContact[];
   SPEAKER: string;
 }
 
@@ -84,13 +89,14 @@ export const EVENT: EventConfig = {
     email: "hello@REPLACE.com", // TODO: Replace with official contact email
   },
   ORGANISER: "IEEE TEMS",
+  // TODO: Replace placeholder phone numbers for each student coordinator before launch.
   COORDINATORS: [
-    "Giriprasad K",
-    "Tazim Sheriff R",
-    "Mithrahasini",
-    "Thanishka Yogesh",
-    "Sathya",
-    "Surya",
+    { name: "Giriprasad K", phone: "+91 XXXXX XXXXX" },
+    { name: "Tazim Sheriff R", phone: "+91 XXXXX XXXXX" },
+    { name: "Mithrahasini", phone: "+91 XXXXX XXXXX" },
+    { name: "Thanishka Yogesh", phone: "+91 XXXXX XXXXX" },
+    { name: "Sathya", phone: "+91 XXXXX XXXXX" },
+    { name: "Surya", phone: "+91 XXXXX XXXXX" },
   ],
   SPEAKER: "To be announced",
 };

@@ -9,11 +9,9 @@ export function DaysSection() {
     <section
       id="days"
       aria-labelledby="days-heading"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
-      <FadeContent blur duration={0.7}>
+      <FadeContent blur duration={0.65} threshold={0.05}>
         <p className="section-label">Domains 02</p>
         <SplitText
           text="Two days. One festival."
@@ -21,6 +19,8 @@ export function DaysSection() {
           splitType="words"
           effect="rise"
           trigger="view"
+          threshold={0.05}
+          rootMargin="-20px"
           delay={50}
           duration={0.5}
           className="mt-4 font-display text-3xl sm:text-4xl font-semibold tracking-tight text-mist"
@@ -33,9 +33,9 @@ export function DaysSection() {
         </p>
       </FadeContent>
 
-      <div className="mt-14 grid grid-cols-1 gap-0 border border-hairline lg:grid-cols-2">
+      <div className="heading-gap grid grid-cols-1 gap-0 border border-hairline lg:grid-cols-2">
         {/* Day 1 */}
-        <article className="border-b border-hairline p-5 sm:p-10 lg:border-b-0 lg:border-r">
+        <article className="border-b border-hairline p-5 sm:p-8 lg:border-b-0 lg:border-r">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-lilac">
               {DAYS_COPY.day1.label}
@@ -72,7 +72,7 @@ export function DaysSection() {
         </article>
 
         {/* Day 2 */}
-        <article className="p-5 sm:p-10">
+        <article className="p-5 sm:p-8">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
             <span className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-lilac">
               {DAYS_COPY.day2.label}
@@ -103,15 +103,15 @@ export function DaysSection() {
       </div>
 
       {/* Themes — numbered like PEC Domains */}
-      <div className="mt-14 sm:mt-20 md:mt-24">
+      <div className="mt-10 sm:mt-12">
         <h3 className="font-display text-xl sm:text-2xl font-semibold tracking-tight text-mist">
           Day 2 tracks
         </h3>
-        <div className="mt-6 divide-y divide-hairline border-y border-hairline sm:mt-8">
+        <div className="mt-5 divide-y divide-hairline border-y border-hairline sm:mt-6">
           {DAY2_THEMES.map((theme, i) => (
             <div
               key={theme.id}
-              className="grid grid-cols-[2.5rem_1fr] gap-3 py-5 sm:grid-cols-[4rem_1fr_1.2fr] sm:items-baseline sm:gap-8 sm:py-6"
+              className="grid grid-cols-[2.5rem_1fr] gap-3 py-4 sm:grid-cols-[4rem_1fr_1.2fr] sm:items-baseline sm:gap-8 sm:py-5"
             >
               <span className="font-display text-sm text-lilac tabular-nums">
                 {String(i + 1).padStart(2, "0")}
@@ -126,11 +126,11 @@ export function DaysSection() {
           ))}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-6 sm:mt-8">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-mute">
             Day 1 pitch areas
           </p>
-          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
             {DAY1_PITCH_AREAS.map((area) => (
               <li key={area} className="text-sm text-dusk">
                 {area}

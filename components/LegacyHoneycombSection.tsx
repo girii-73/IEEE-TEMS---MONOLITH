@@ -125,16 +125,14 @@ export function LegacyHoneycombSection() {
     <section
       id="legacy"
       aria-labelledby="legacy-heading"
-      className="relative w-full overflow-x-clip py-16 sm:py-24 md:py-32"
+      className="section-y relative w-full overflow-x-clip"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5 }}
           className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-end sm:justify-between"
         >
           <div>
@@ -163,8 +161,8 @@ export function LegacyHoneycombSection() {
         initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.6, delay: 0.05 }}
-        className="relative mt-8 h-[min(42vh,320px)] w-full min-h-[240px] sm:mt-14 sm:h-[min(62vh,560px)] sm:min-h-[400px]"
+        transition={{ duration: 0.5, delay: 0.05 }}
+        className="heading-gap relative h-[240px] w-full sm:h-[310px] md:h-[340px]"
       >
         <FlexCarousel
           key={focusIndex}
@@ -172,7 +170,7 @@ export function LegacyHoneycombSection() {
           preset="liquid"
           intro={shouldReduceMotion ? "none" : "rise"}
           fit="landscape"
-          cardHeight={compact ? 0.58 : 0.48}
+          cardHeight={compact ? 0.68 : 0.64}
           gap={compact ? 10 : 14}
           radius={compact ? 12 : 14}
           squeeze={0.18}

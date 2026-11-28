@@ -10,10 +10,8 @@ export function JudgingSection() {
     <section
       id="judging"
       aria-labelledby="judging-heading"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
       <p className="section-label">Judging</p>
       <h2
         id="judging-heading"
@@ -22,7 +20,7 @@ export function JudgingSection() {
         How you&apos;ll be judged
       </h2>
 
-      <div className="mt-8 grid grid-cols-1 gap-10 sm:mt-12 sm:gap-14 lg:grid-cols-2 lg:gap-16">
+      <div className="heading-gap grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-mute">
             Day 1 — Weighted criteria

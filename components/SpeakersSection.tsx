@@ -8,7 +8,7 @@ const Lanyard = dynamic(() => import("@/components/Lanyard"), {
   ssr: false,
   loading: () => (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="h-48 w-36 animate-pulse rounded-2xl border border-hairline bg-raised/60" />
+      <div className="h-44 w-32 animate-pulse rounded-2xl border border-hairline bg-raised/60" />
     </div>
   ),
 });
@@ -61,14 +61,19 @@ const SPEAKERS: SpeakerCard[] = [
   },
 ];
 
-function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enableIntro: boolean }) {
+function SpeakerLanyard({
+  speaker,
+  enableIntro,
+}: {
+  speaker: SpeakerCard;
+  enableIntro: boolean;
+}) {
   const stageRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return undefined;
-    // Mount WebGL only when the badge is near the viewport
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) setActive(true);
@@ -83,7 +88,7 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
     <article className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10">
       <div
         ref={stageRef}
-        className="relative h-[min(62vh,520px)] w-full overflow-hidden rounded-2xl border border-hairline bg-deep/40 sm:h-[560px]"
+        className="relative h-[340px] w-full overflow-hidden rounded-2xl border border-hairline bg-deep/40 sm:h-[400px]"
       >
         {active ? (
           <Lanyard
@@ -95,9 +100,9 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
             orientation="portrait"
             finish={speaker.finish ?? "glossy"}
             cornerRadius={0.35}
-            size={0.58}
+            size={0.62}
             anchor="center"
-            strapLength={0.42}
+            strapLength={0.38}
             strapColor="#5f279e"
             strapWidth={0.7}
             metal="silver"
@@ -110,7 +115,7 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <div className="h-48 w-36 animate-pulse rounded-2xl border border-hairline bg-raised/60" />
+            <div className="h-44 w-32 animate-pulse rounded-2xl border border-hairline bg-raised/60" />
           </div>
         )}
         <p className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-[10px] uppercase tracking-[0.18em] text-mute">
@@ -118,7 +123,7 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
         </p>
       </div>
 
-      <div className={speaker.featured ? "" : "lg:order-first"}>
+      <div>
         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-lilac sm:tracking-[0.18em]">
           {speaker.badge}
         </p>
@@ -127,7 +132,7 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
         </h3>
         <p className="mt-1 text-sm text-dusk">{speaker.role}</p>
         {speaker.topics ? (
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
             {speaker.topics.map((topic) => (
               <li key={topic} className="text-sm text-mute">
                 {topic}
@@ -142,20 +147,20 @@ function SpeakerLanyard({ speaker, enableIntro }: { speaker: SpeakerCard; enable
 
 export function SpeakersSection() {
   const shouldReduceMotion = useReducedMotion();
+  const featuredSpeakers = SPEAKERS.filter((s) => s.featured);
+  const upcomingSpeakers = SPEAKERS.filter((s) => !s.featured);
 
   return (
     <section
       id="speakers"
       aria-labelledby="speakers-heading"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.5 }}
       >
         <p className="section-label">Speakers 06</p>
         <h2
@@ -170,15 +175,14 @@ export function SpeakersSection() {
         </p>
       </motion.div>
 
-      {/* Stacked lanyards — room to swing; lighter than a side-by-side WebGL row */}
-      <div className="mt-10 flex flex-col gap-14 sm:mt-14 sm:gap-20">
-        {SPEAKERS.map((speaker) => (
+      <div className="heading-gap flex flex-col gap-8">
+        {featuredSpeakers.map((speaker) => (
           <motion.div
             key={speaker.id}
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.55 }}
+            transition={{ duration: 0.5 }}
           >
             <SpeakerLanyard
               speaker={speaker}
@@ -186,6 +190,25 @@ export function SpeakersSection() {
             />
           </motion.div>
         ))}
+
+        {upcomingSpeakers.length > 0 ? (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {upcomingSpeakers.map((speaker) => (
+              <div
+                key={speaker.id}
+                className="rounded-xl border border-dashed border-edge bg-deep/30 px-5 py-5"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-lilac">
+                  {speaker.badge}
+                </p>
+                <p className="mt-2 font-display text-lg font-medium text-mist">
+                  {speaker.name}
+                </p>
+                <p className="mt-1 text-xs text-dusk">{speaker.role}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

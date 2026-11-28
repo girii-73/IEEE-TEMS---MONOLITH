@@ -25,10 +25,12 @@ function PartnerCard({
 }) {
   const inner = (
     <div
-      className={`flex flex-col items-center justify-center gap-2 border border-hairline bg-raised/40 text-center transition-colors hover:border-lilac/40 ${
-        large
-          ? "min-h-[140px] px-6 py-8 sm:min-h-[160px]"
-          : "min-h-[110px] px-4 py-6 sm:min-h-[120px]"
+      className={`flex flex-col items-center justify-center gap-1.5 border border-hairline bg-raised/40 text-center transition-colors hover:border-lilac/40 ${
+        slot.logo
+          ? large
+            ? "min-h-[100px] px-6 py-5 sm:min-h-[112px]"
+            : "min-h-[82px] px-4 py-4 sm:min-h-[90px]"
+          : "px-4 py-4"
       }`}
     >
       {slot.logo ? (
@@ -107,16 +109,14 @@ export function SponsorsPartnersSection() {
     <section
       id="sponsors"
       aria-labelledby="sponsors-heading"
-      className="py-16 sm:py-24 md:py-32"
+      className="section-y"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.5 }}
         >
           <p className="section-label">Sponsors 08</p>
           <h2
@@ -130,7 +130,7 @@ export function SponsorsPartnersSection() {
           </p>
         </motion.div>
 
-        <div className="mt-10 space-y-10 sm:mt-14 sm:space-y-12">
+        <div className="heading-gap space-y-6 sm:space-y-8">
           {title.length > 0 ? (
             <div>
               <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
@@ -172,7 +172,7 @@ export function SponsorsPartnersSection() {
         </div>
       </div>
 
-      <div className="mt-16 sm:mt-20 md:mt-24">
+      <div className="mt-8 sm:mt-10">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-mute">
             Community partners
@@ -182,7 +182,7 @@ export function SponsorsPartnersSection() {
           </h3>
         </div>
 
-        <div className="mt-8 sm:mt-10">
+        <div className="mt-5 sm:mt-6">
           <LogoLoop
             logos={communityLogos}
             speed={shouldReduceMotion ? 0 : 90}

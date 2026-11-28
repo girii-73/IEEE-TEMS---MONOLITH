@@ -13,11 +13,9 @@ export function FaqSection() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="mx-auto max-w-6xl px-4 py-16 sm:px-8 sm:py-24 md:py-32"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
-      <div className="section-rule mb-10 sm:mb-16 md:mb-20" />
-
-      <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-16">
+      <div className="grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="lg:col-span-4">
           <p className="section-label">FAQ 09</p>
           <h2

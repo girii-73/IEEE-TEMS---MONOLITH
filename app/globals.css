@@ -23,6 +23,8 @@
 
   --shadow-soft: 0 24px 64px -28px rgba(95, 39, 158, 0.5);
   --shadow-cta: 0 12px 36px -8px rgba(152, 103, 225, 0.55);
+  --section-y: clamp(3rem, 6vw, 5rem);
+  --heading-gap: clamp(1.5rem, 3vw, 2.5rem);
   --background: #07040d;
   --foreground: #f8f8ff;
   --card: #1e1925;
@@ -576,6 +578,15 @@ body {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--brand);
+}
+
+.section-y {
+  padding-block: var(--section-y);
+  scroll-margin-top: 5.5rem;
+}
+
+.heading-gap {
+  margin-top: var(--heading-gap);
 }
 
 .dark {

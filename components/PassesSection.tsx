@@ -12,13 +12,13 @@ export function PassesSection() {
     <section
       id="passes"
       aria-labelledby="passes-heading"
-      className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28"
+      className="section-y mx-auto max-w-6xl px-4 sm:px-8"
     >
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="text-center max-w-2xl mx-auto"
       >
         <div className="glass-surface-lite inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-lilac mb-3">
@@ -36,7 +36,7 @@ export function PassesSection() {
         </p>
       </motion.div>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 items-stretch">
+      <div className="heading-gap grid grid-cols-1 gap-6 md:grid-cols-3 items-stretch">
         {PASSES_DATA.map((pass, idx) => {
           const url = EVENT.REG_URLS[pass.urlKey].trim();
           const hasUrl = url.length > 0;
@@ -44,16 +44,16 @@ export function PassesSection() {
           return (
             <motion.article
               key={pass.id}
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{
-                duration: 0.5,
-                delay: idx * 0.1,
+                duration: 0.45,
+                delay: idx * 0.07,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className={`glass-panel flex flex-col justify-between rounded-[14px] p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 ${pass.featured
-                ? "ring-2 ring-amethyst/70 shadow-[0_0_40px_rgba(139,92,246,0.28)] md:-my-2"
+              className={`glass-panel flex flex-col justify-between rounded-[14px] p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1.5 ${pass.featured
+                ? "ring-2 ring-amethyst/70 shadow-[0_0_40px_rgba(139,92,246,0.28)]"
                 : ""
                 }`}
             >
@@ -124,11 +124,11 @@ export function PassesSection() {
 
       {/* Centered GForm Redirect CTA (No on-site form) */}
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-12 flex flex-col items-center text-center"
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-8 sm:mt-10 flex flex-col items-center text-center"
       >
         <a
           href={fullPassUrl || "#passes"}

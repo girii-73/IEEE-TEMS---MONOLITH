@@ -185,25 +185,22 @@ function Pillar() {
     if (!mesh) return;
     const mat = createBasaltMaterial();
     mesh.material = mat;
-    mesh.onBeforeRender = () => {
-      const shader = mat.userData.shader as
-        | { uniforms: { uTime: { value: number } } }
-        | undefined;
-      if (shader) {
-        shader.uniforms.uTime.value =
-          (mesh.parent?.userData.elapsedTime as number | undefined) ?? 0;
-      }
-    };
     return () => {
-      mesh.onBeforeRender = () => {};
       mat.dispose();
     };
   }, []);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
+    const mat = pillarMesh.current?.material as
+      | THREE.MeshStandardMaterial
+      | undefined;
+    const shader = mat?.userData.shader as
+      | { uniforms: { uTime: { value: number } } }
+      | undefined;
+    if (shader) shader.uniforms.uTime.value = t;
+
     if (!group.current) return;
-    group.current.userData.elapsedTime = t;
 
     if (reduceMotion.current) {
       group.current.rotation.y = 0.12;
@@ -362,7 +359,7 @@ function Scene() {
         angle={0.55}
         penumbra={0.85}
         intensity={0.85}
-        color="#5f279e"
+        color="#6b13af"
       />
       <directionalLight position={[0, 7, 1.5]} intensity={0.45} color="#f4f0ff" />
       <pointLight position={[0, 3.2, 0.4]} intensity={1.4} color={GLOW} distance={5} />
@@ -377,7 +374,7 @@ function Scene() {
   );
 }
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 export function MonolithBlock({ className = "" }: { className?: string }) {
   const ready = useSyncExternalStore(

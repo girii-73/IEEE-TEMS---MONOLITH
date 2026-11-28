@@ -104,9 +104,8 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 -mt-[100svh]">
-        {/* Extra height + justify-end drops the title block further down-center */}
-        <div className="relative z-[1] flex min-h-[calc(100svh+12vh)] w-full flex-col justify-end sm:min-h-[calc(100svh+14vh)]">
-          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-8 text-center sm:px-8 sm:pb-10">
+        <div className="relative z-[1] flex min-h-[100svh] w-full flex-col justify-end pt-20 sm:pt-24">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-6 text-center sm:px-8 sm:pb-8">
             <div className="relative mb-2 inline-flex w-full max-w-[min(100%,22rem)] flex-col items-stretch sm:max-w-none sm:w-auto">
               <div
                 ref={laserSurfaceRef}
