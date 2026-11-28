@@ -180,16 +180,6 @@ function Pillar() {
     ).matches;
   }, []);
 
-  useEffect(() => {
-    const mesh = pillarMesh.current;
-    if (!mesh) return;
-    const mat = createBasaltMaterial();
-    mesh.material = mat;
-    return () => {
-      mat.dispose();
-    };
-  }, []);
-
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     const mat = pillarMesh.current?.material as
@@ -227,6 +217,16 @@ function Pillar() {
     // Keep aspect-aware so it doesn't look crushed on mobile
     void size;
   });
+
+  useEffect(() => {
+    const mesh = pillarMesh.current;
+    if (!mesh) return;
+    const mat = createBasaltMaterial();
+    mesh.material = mat;
+    return () => {
+      mat.dispose();
+    };
+  }, []);
 
   return (
     <group ref={group} position={[0, -0.2, 0]}>

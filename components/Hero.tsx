@@ -83,22 +83,22 @@ export function Hero() {
             surfaceRef={laserSurfaceRef}
             color={isLight ? "#7c3aed" : "#9867e1"}
             theme="dark"
-            intensity={compact ? 0.8 : 1.8}
-            beamWidth={compact ? 0.95 : 2.0}
-            flare={compact ? 0.48 : 1.25}
-            spread={compact ? 0.5 : 1.3}
-            spill={compact ? 0.45 : 1.05}
-            fog={compact ? 0 : 0.1}
-            dust={compact ? 0 : 1.0}
-            streaks={compact ? 0.22 : 1.35}
-            dots={compact ? 0 : 0.65}
-            pulse={compact ? 0.3 : 1.1}
-            speed={compact ? 0.5 : 1}
+            intensity={compact ? 1.65 : 1.8}
+            beamWidth={compact ? 1.85 : 2.0}
+            flare={compact ? 1.1 : 1.25}
+            spread={compact ? 1.15 : 1.3}
+            spill={compact ? 0.9 : 1.05}
+            fog={compact ? 0.06 : 0.1}
+            dust={compact ? 0.55 : 1.0}
+            streaks={compact ? 0.95 : 1.35}
+            dots={compact ? 0.35 : 0.65}
+            pulse={compact ? 0.85 : 1.1}
+            speed={compact ? 0.75 : 1}
             beamPosition={0.5}
             surfaceLevel={0.72}
             mouseInteraction={!compact}
             intro={!compact}
-            dpr={compact ? 1 : undefined}
+            dpr={compact ? 1.25 : undefined}
           />
         </div>
       </div>

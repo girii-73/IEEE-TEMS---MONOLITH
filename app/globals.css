@@ -163,9 +163,18 @@ html {
   padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
 }
 
+/* Clears the floating nav pill + safe area for fixed/underlay content */
+.nav-clearance {
+  padding-top: calc(env(safe-area-inset-top, 0px) + 5.75rem);
+}
+
 @media (min-width: 640px) {
   .nav-safe-top {
     padding-top: max(1rem, env(safe-area-inset-top, 0px));
+  }
+
+  .nav-clearance {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 6.5rem);
   }
 }
 

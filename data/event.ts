@@ -95,8 +95,8 @@ export const EVENT: EventConfig = {
     { name: "Tazim Sheriff R", phone: "+91 XXXXX XXXXX" },
     { name: "Mithrahasini", phone: "+91 XXXXX XXXXX" },
     { name: "Thanishka Yogesh", phone: "+91 XXXXX XXXXX" },
-    { name: "Sathya", phone: "+91 XXXXX XXXXX" },
     { name: "Surya", phone: "+91 XXXXX XXXXX" },
+    { name: "Sathya", phone: "+91 XXXXX XXXXX" },
   ],
   SPEAKER: "To be announced",
 };

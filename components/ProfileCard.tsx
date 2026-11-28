@@ -2,7 +2,7 @@
 
 import { memo, useEffect, useLayoutEffect, useRef, type CSSProperties } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Mail01Icon } from "@hugeicons/core-free-icons";
+import { Linkedin01Icon, Mail01Icon } from "@hugeicons/core-free-icons";
 
 import "./ProfileCard.css";
 
@@ -84,6 +84,7 @@ export type ProfileCardProps = {
   status?: string;
   statusColor?: string;
   contactText?: string;
+  linkedinUrl?: string;
   showUserInfo?: boolean;
   onContactClick?: () => void;
   theme?: "dark" | "light";
@@ -110,6 +111,7 @@ const ProfileCard = ({
   status = "Online",
   statusColor = "#22c55e",
   contactText = "Contact",
+  linkedinUrl,
   showUserInfo = true,
   onContactClick,
   theme = "dark",
@@ -420,17 +422,31 @@ const ProfileCard = ({
               {handle && <span className="profile-card__handle">@{handle}</span>}
               {status && <span className="profile-card__status">{status}</span>}
             </div>
-            {contactText && (
-              <button
-                type="button"
-                className="profile-card__contact"
-                onClick={onContactClick}
-                aria-label={name ? `${contactText} ${name}` : contactText}
-              >
-                <HugeiconsIcon icon={Mail01Icon} size={16} strokeWidth={1.8} />
-                {contactText}
-              </button>
-            )}
+            <div className="profile-card__actions">
+              {linkedinUrl ? (
+                <a
+                  className="profile-card__social"
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name ? `${name} on LinkedIn` : "LinkedIn profile"}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <HugeiconsIcon icon={Linkedin01Icon} size={15} strokeWidth={1.8} />
+                </a>
+              ) : null}
+              {contactText && (
+                <button
+                  type="button"
+                  className="profile-card__contact"
+                  onClick={onContactClick}
+                  aria-label={name ? `${contactText} ${name}` : contactText}
+                >
+                  <HugeiconsIcon icon={Mail01Icon} size={16} strokeWidth={1.8} />
+                  {contactText}
+                </button>
+              )}
+            </div>
           </div>
         )}
 

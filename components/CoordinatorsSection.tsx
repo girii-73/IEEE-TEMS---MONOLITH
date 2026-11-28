@@ -1,6 +1,6 @@
 import { EVENT } from "@/data/event";
-
 export function CoordinatorsSection() {
+
   return (
     <section
       id="coordinators"
